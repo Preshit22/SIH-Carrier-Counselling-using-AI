@@ -1,0 +1,41 @@
+a[href*='https://github.com/Chainlit/chainlit'] {
+    visibility: hidden;
+}
+
+img {
+  margin-left: 100px;
+  transform: scale(1.8); /* Adjust multiplier to increase size */
+}
+
+p > img {
+    transform: scale(1); 
+  }
+
+.MuiStack-root.css-1mzerio {
+    margin-left: 350px; /* Adjust value for desired shift */
+}
+
+
+  
+.markdown-body h1, h3 {
+    text-align: center;
+}
+
+.markdown-body h3 {
+    font-weight: normal; /* Replace 700 with 400 for regular weight */
+}
+
+
+a[href*='/readme'] {
+    visibility: hidden;
+}
+
+a[href*='/'] {
+    visibility: hidden;
+}
+
+.markdown-body img[alt="Image of a cat"] {
+    /* Apply specific styles to images with alt text "Image of a cat" */
+    float: right;
+    margin-left: 10px;
+}

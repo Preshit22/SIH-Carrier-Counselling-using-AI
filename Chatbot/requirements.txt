@@ -1,0 +1,7 @@
+langchain
+huggingface_hub
+chainlit
+python-dotenv
+langchain-google-genai
+asyncio
+pandas
