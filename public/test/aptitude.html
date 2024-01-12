@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #f8f8f8;
+      }
+      .app {
+        background: rgb(255, 255, 255);
+        width: 90%;
+        max-width: 600px;
+        border-radius: 10px;
+        padding: 30px;
+        border: 0px solid rgb(177, 177, 177);
+        box-shadow: -1px 10px 20px 0px rgba(197, 208, 216, 0.2);
+      }
+
+      h1 {
+        color: #001e4d;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .quiz {
+        padding: 20px 0;
+      }
+
+      .quiz h2 {
+        font-size: 18px;
+        color: #353535;
+        font-weight: 600;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        background-color: #e4e0e0;
+        color: #222;
+        font-weight: 500;
+        width: 100%;
+        border: 0px solid #222;
+        padding: 15px;
+        margin: 10px 0;
+        text-align: left;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .btn:hover:not(:disabled) {
+        background-color: #a7a5a5;
+      }
+
+      .btn:disabled {
+        cursor: no-drop;
+      }
+
+      #next-btn {
+        background-color: #001e4d;
+        color: #fff;
+        font-weight: 500;
+        widows: 150px;
+        border: 0;
+        padding: 15px 30px;
+        margin: 20px auto 0;
+        border-radius: 4px;
+        cursor: pointer;
+        display: none;
+      }
+
+      .correct {
+        background-color: #a7a5a5;
+      }
+
+      body > .skiptranslate {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="no-print text-gray-600 body-font">
+      <nav
+        class="bg-transparent fixed w-full z-20 top-0 start-0 border-b border-gray-200 bg-opacity-30 backdrop-filter backdrop-blur-lg"
+      >
+        <div
+          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+        >
+          <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="/img/logo.png" class="h-10" alt="Flowbite Logo" />
+            <span
+              class="self-center hidden sm:block text-2xl font-semibold whitespace-nowrap dark:text-black"
+              >AI Guruji</span
+            >
+          </a>
+
+          <div
+            id="loggedInContent"
+            style="display: none"
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <button
+              onclick="localStorage.setItem('login', 'false'); window.location.reload();"
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+              type="button"
+            >
+              Sign Out
+            </button>
+          </div>
+
+          <div
+            id="notLoggedInContent"
+            style="display: none"
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <button
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+              type="button"
+            >
+              Sign in
+              <svg
+                class="w-2.5 h-2.5 ms-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+          </div>
+          <!-- Dropdown menu -->
+          <div
+            id="dropdown"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700"
+              aria-labelledby="dropdownDefaultButton"
+            >
+              <li>
+                <a
+                  href="/studentLogin"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                  >Student
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/parentLogin"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                  >Parent
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <button
+            data-collapse-toggle="navbar-sticky"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-200"
+            aria-controls="navbar-sticky"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+
+          <div
+            class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="navbar-sticky"
+          >
+            <ul
+              class="flex flex-col items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:border-gray-200"
+            >
+              <li>
+                <a
+                  href="/"
+                  class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Home</a
+                >
+              </li>
+
+              <li>
+                <a
+                  href="../test/result.html"
+                  class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Results</a
+                >
+              </li>
+
+              <li>
+                <button
+                  id="dropdownDefaultButton"
+                  data-dropdown-toggle="langdropdown"
+                  class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  type="button"
+                >
+                  Language
+                  <svg
+                    class="w-2.5 h-2.5 ms-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+
+                <!-- Dropdown menu -->
+                <div
+                  id="langdropdown"
+                  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-[white] border border-gray-300"
+                >
+                  <ul
+                    class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownDefaultButton"
+                  >
+                    <li>
+                      <div class="p-0" id="google_translate_element"></div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div
+      class="showIfLogin mt-[100px] flex flex-col justify-center items-center lg:items-start lg:flex-row lg:justify-around"
+    >
+      <div class="">
+        <h1
+          class="mb-1 m-5 text-4xl font-bold leading-none tracking-tight text-gray-800 md:text-2xl lg:text-3xl"
+        >
+          Aptitude Test
+        </h1>
+        <img src="../img/apti.png" class="rounded-lg" alt="" />
+      </div>
+      <div class="app">
+        <div class="quiz">
+          <h2 id="question">Question here</h2>
+          <div id="answer-buttons">
+            <button class="btn">Option 1</button>
+            <button class="btn">Option 2</button>
+            <button class="btn">Option 3</button>
+            <button class="btn">Option 4</button>
+          </div>
+          <button id="next-btn">Next</button>
+          <a href="../test/result.html">
+            <button
+              id="resultButton"
+              class="text-white bg-[#001e4d] hover:bg-[#05265a] focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-[#001e4d] dark:hover:bg-[#05265a]"
+            >
+              Show Me Results
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if 'login' item exists in local storage
+        if (localStorage.getItem("login") === "true") {
+          document.getElementById("loggedInContent").style.display = "block";
+          document.getElementById("notLoggedInContent").style.display = "none";
+          document.querySelector(".showIfLogin").style.display = "flex";
+        } else {
+          document.getElementById("loggedInContent").style.display = "none";
+          document.getElementById("notLoggedInContent").style.display = "block";
+          document.querySelector(".showIfLogin").style.display = "none";
+        }
+      });
+    </script>
+
+    <script>
+      const questions = [
+        {
+          question: "What is the opposite of 'ambiguous' ? ",
+          answers: [
+            { text: "Modest", correct: true },
+            { text: "Confusing ", correct: false },
+            { text: "Obvious ", correct: false },
+            { text: "Difficult", correct: false },
+          ],
+        },
+        {
+          question:
+            "A recipe calls for 3 cups of flour for every 6 eggs. If you have 24 eggs, how many cups of flour do you need?",
+          answers: [
+            { text: "4", correct: false },
+            { text: "8", correct: false },
+            { text: "12", correct: true },
+            { text: "16", correct: false },
+          ],
+        },
+        {
+          question:
+            "In the following sequence of shapes, which shape comes next? Circle, Triangle, Square,Pentagon, Hexagon,Heptagon",
+          answers: [
+            { text: "Octagon", correct: true },
+            { text: "Diamond ", correct: false },
+            { text: "Star ", correct: false },
+            { text: " Circle", correct: false },
+          ],
+        },
+        {
+          question:
+            "Imagine you are looking at a cube from above. How many squares can you see?",
+          answers: [
+            { text: "3 ", correct: false },
+            { text: "1", correct: true },
+            { text: "6", correct: false },
+            { text: "9", correct: false },
+          ],
+        },
+        {
+          question:
+            "If you face south and turn 90 degrees clockwise, which direction are you facing now? ",
+          answers: [
+            { text: "North ", correct: false },
+            { text: "East", correct: true },
+            { text: "West", correct: false },
+            { text: "South", correct: false },
+          ],
+        },
+        {
+          question: "If 'BARK' is coded as 'CBLQ' how is 'FISH' coded? ",
+          answers: [
+            { text: "GKTI ", correct: false },
+            { text: "GJTI", correct: true },
+            { text: "GJTH", correct: false },
+            { text: "GJTTH", correct: false },
+          ],
+        },
+        {
+          question:
+            "All cats are mammals. All mammals have fur. Therefore, all cats have fur.",
+          answers: [
+            { text: "True  ", correct: true },
+            { text: "False ", correct: false },
+            { text: "Maybe ", correct: false },
+            { text: "Not enough information", correct: false },
+          ],
+        },
+        {
+          question:
+            "I looked at 10 red apples and they were all sweet. Therefore, all apples are sweet.",
+          answers: [
+            { text: "True  ", correct: false },
+            { text: "False ", correct: true },
+            { text: "Maybe ", correct: false },
+            { text: "Not enough information", correct: false },
+          ],
+        },
+        {
+          question:
+            "Some students are athletes. All athletes are healthy. Therefore, some students are healthy.",
+          answers: [
+            { text: "True  ", correct: true },
+            { text: "False ", correct: false },
+            { text: "Maybe ", correct: false },
+            { text: "Not enough information", correct: false },
+          ],
+        },
+        {
+          question:
+            "You are reading an article about the benefits of exercise. The article claims that people who exercise regularly are less likely to develop heart disease. However, you notice that the article is sponsored by a company that sells exercise equipment.",
+          answers: [
+            { text: "The article is definitely biased.  ", correct: false },
+            {
+              text: "The article could be biased, but it might also be accurate.  ",
+              correct: true,
+            },
+            {
+              text: "The article is not biased because it is based on scientific evidence. ",
+              correct: false,
+            },
+            {
+              text: "The article is not biased because it is sponsored by a reputable company.",
+              correct: false,
+            },
+          ],
+        },
+        {
+          question:
+            "You are trying to decide which college to attend. What factors should you consider?",
+          answers: [
+            { text: "The cost of tuition", correct: false },
+            { text: "The location of the college", correct: false },
+            { text: "The academic programs offered", correct: false },
+            { text: "All of the above", correct: true },
+          ],
+        },
+        {
+          question: "SMELL is to NOSE, as SOUND is to: ",
+          answers: [
+            { text: "ear", correct: false },
+            { text: "eye ", correct: true },
+            { text: "music", correct: false },
+            { text: "trumpet", correct: false },
+          ],
+        },
+        {
+          question:
+            "Find the two statements that together prove:Kelly has brown hair <br> 1: Kelly has long hair. <br> 2: Rachael has brown hair. <br> 3: Rachael is ten years old. <br> 4: Kelly’s hair is the same color as Rachael’s. <br> 5: Rachael has short hair.",
+          answers: [
+            { text: "1 & 2", correct: false },
+            { text: "2 & 4 ", correct: true },
+            { text: "1 & 5 ", correct: false },
+            { text: "2 & 3", correct: false },
+          ],
+        },
+        {
+          question:
+            "All of the words in the box below are alike in some way Vigilant | Precise | Meticulous | Particular Which of the following options could not be in the box?",
+          answers: [
+            { text: "careful", correct: false },
+            { text: "thorough", correct: false },
+            { text: "detailed", correct: false },
+            { text: "perfectionistic", correct: true },
+          ],
+        },
+        {
+          question:
+            "In a foreign language <br> MISD KUMP GOTH means MERRY CHRISTMAS DAD. <br> GOTH WUIM FREK KUMP means DAD IS MERRY TODAY.<br> KOMP WUIM FREK KUMP means MUM IS MERRY TODAY. <br> Which word means CHRISTMAS?",
+          answers: [
+            { text: "MISD", correct: false },
+            { text: "GOTH", correct: false },
+            { text: "KUMP", correct: true },
+            { text: "WUIM", correct: false },
+          ],
+        },
+        {
+          question:
+            "Find the two statements that together prove:Sandy is a country music singer. <br> 1: Sandy sings in a band. <br> 2: Sandy likes country music the best. <br> 3: Difficult music such as country and classical require a strongly trained voice. <br> 4: Sandy’s band plays country songs. <br> 5: Sandy has attended singing lessons for many years.",
+          answers: [
+            { text: "3 & 4", correct: true },
+            { text: "1 & 4", correct: false },
+            { text: "3 & 5", correct: false },
+            { text: "2 & 5", correct: false },
+          ],
+        },
+        {
+          question:
+            "Jordan’s cat is bigger than Amy’s cat, but is smaller than Jenna’s cat. Fiona’s cat is the same size as Wendy’s cat, which is bigger than Amy’s cat, but smaller than Jordan’s.If bigger cats are faster, but smaller cats are more obedient, which of the following lists the fastest and most obedient cat?",
+          answers: [
+            { text: "Fiona & Jenna", correct: false },
+            { text: "Amy & Jordan", correct: true },
+            { text: "Jenna & Amy", correct: false },
+            { text: "None", correct: false },
+          ],
+        },
+        {
+          question:
+            "Assume that all kibs are bics, some bics are vics, and some tics are dups. Therefore it makes sense that:",
+          answers: [
+            { text: "all kibs are vics ", correct: false },
+            { text: "some bics are kibs ", correct: false },
+            { text: "all tics are bics", correct: false },
+            { text: "some kibs are bics ", correct: true },
+          ],
+        },
+        {
+          question:
+            "Which of the following words is OPPOSITE in meaning to commotion: ",
+          answers: [
+            { text: "bustle", correct: false },
+            { text: "serene", correct: true },
+            { text: "movement", correct: false },
+            { text: "locomotion", correct: false },
+          ],
+        },
+        {
+          question:
+            "Four of the following words are alike in some way. Which is the odd word out? ",
+          answers: [
+            { text: "misconception", correct: true },
+            { text: "predicament", correct: false },
+            { text: "quandary", correct: false },
+            { text: "dilemma", correct: false },
+          ],
+        },
+        {
+          question:
+            "If a shirt originally costs Rs 40 and is now on sale for 25% off, what is the final price?",
+          answers: [
+            { text: "Rs 30", correct: true },
+            { text: "Rs 35", correct: false },
+            { text: "Rs 38", correct: false },
+            { text: "Rs 42", correct: false },
+          ],
+        },
+        {
+          question:
+            "2.	In a survey, 60% of students preferred pizza, 30% preferred burgers, and the rest preferred sandwiches. If there were 150 students surveyed, how many preferred sandwiches?",
+          answers: [
+            { text: "15", correct: false },
+            { text: "20", correct: false },
+            { text: "25", correct: true },
+            { text: "30", correct: false },
+          ],
+        },
+        {
+          question: "Solve for x: x^2 - 4x + 4 = 0",
+          answers: [
+            { text: "2", correct: false },
+            { text: "3", correct: true },
+            { text: "4", correct: false },
+            { text: "5", correct: false },
+          ],
+        },
+        {
+          question:
+            "If the ratio of boys to girls in a class is 3:2 and there are 25 students in total, how many boys are there?",
+          answers: [
+            { text: "12", correct: false },
+            { text: "15", correct: true },
+            { text: "18", correct: false },
+            { text: "20", correct: false },
+          ],
+        },
+        {
+          question:
+            "If a pizza is divided into 8 equal slices and you eat 3 slices, what fraction of the pizza have you eaten?",
+          answers: [
+            { text: "1/4", correct: false },
+            { text: "3/8", correct: true },
+            { text: "1/2", correct: false },
+            { text: "5/8", correct: false },
+          ],
+        },
+        {
+          question:
+            "If you roll a fair six-sided die, what is the probability of getting an even number?",
+          answers: [
+            { text: "1/4", correct: false },
+            { text: "3/8", correct: false },
+            { text: "1/2", correct: true },
+            { text: "5/8", correct: false },
+          ],
+        },
+        {
+          question: "Solve the system of equations: <br> 2x+y=10 <br> 3x−2y=5",
+          answers: [
+            { text: "x = 2, y = 6", correct: false },
+            { text: "x = 3, y = 4", correct: false },
+            { text: "x = 4, y = 2", correct: true },
+            { text: "x = 5, y = 0", correct: false },
+          ],
+        },
+        {
+          question:
+            "If an investment grows by 8% per year, how much will a RS 1,000 investment be worth after 5 years?",
+          answers: [
+            { text: "RS 1,469.64", correct: false },
+            { text: "RS 1,688.2", correct: true },
+            { text: "RS 1,808.0", correct: false },
+            { text: "RS 1,940.76", correct: false },
+          ],
+        },
+        {
+          question:
+            "3.	Examine carefully the following statements and answer four items that follow: <br> (i) A and B play Football and Hockey <br> (ii) C and D play Badminton and Cricket <br> (iii) B and C play Cricket and Football <br> (iv) A and D play Hockey and Badminton One who plays Badminton, Football and Hockey",
+          answers: [
+            { text: "A", correct: false },
+            { text: "B", correct: false },
+            { text: "C", correct: true },
+            { text: "D", correct: false },
+          ],
+        },
+        {
+          question:
+            "If in a certain code language ‘NAME’ is written as ‘MZLD’, then how will ‘PEON’ be coded in that language ?",
+          answers: [
+            { text: "ODNM", correct: false },
+            { text: "ODMN", correct: false },
+            { text: "ONDM", correct: false },
+            { text: "OMND", correct: true },
+          ],
+        },
+        {
+          question: "If P = 16 and TAP = 37, then CUP =?  ",
+          answers: [
+            { text: "40", correct: false },
+            { text: "38", correct: false },
+            { text: "36", correct: false },
+            { text: "39", correct: true },
+          ],
+        },
+        {
+          question:
+            "Adhar goes 4 km straight from his school. He turns to his right and walks 3 km. He again moves 2 km after tu4rning right to reach his house. If his house is located in South-East direction from his school, then in which direction Adhar started moving initially from his school?   ",
+          answers: [
+            { text: "North", correct: false },
+            { text: "South", correct: true },
+            { text: "East", correct: false },
+            { text: "West", correct: false },
+          ],
+        },
+        {
+          question:
+            "Find the missing term in the following series: ABD, DGK, HMS, MTB, SBL, _?_",
+          answers: [
+            { text: "ZKU ", correct: false },
+            { text: "ZKW", correct: false },
+            { text: "ZAB", correct: true },
+            { text: "XKW", correct: false },
+          ],
+        },
+        {
+          question: "3, 5, 9, 15, 23, 33, 45, 59, _?_",
+          answers: [
+            { text: "60 ", correct: false },
+            { text: "81", correct: false },
+            { text: "72", correct: false },
+            { text: "75", correct: true },
+          ],
+        },
+        {
+          question: "3, 5, 9, 15, 23, 33, 45, 59, _?_  ",
+          answers: [
+            { text: "Fair ", correct: false },
+            { text: "Worse", correct: false },
+            { text: "Average", correct: true },
+            { text: "Not so bad", correct: false },
+          ],
+        },
+      ];
+
+      const questionElement = document.getElementById("question");
+      const answerButtons = document.getElementById("answer-buttons");
+      const nextButton = document.getElementById("next-btn");
+
+      resultButton.style.display = "none";
+      let currentQuestionIndex = 0;
+      let score = 0;
+
+      function startQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        nextButton.innerHTML = "Next";
+        showQuestion();
+      }
+
+      function showQuestion() {
+        resetState();
+        let currentQuestion = questions[currentQuestionIndex];
+        let questionNo = currentQuestionIndex + 1;
+        questionElement.innerHTML =
+          questionNo + ". " + currentQuestion.question;
+
+        currentQuestion.answers.forEach((answer) => {
+          const button = document.createElement("button");
+          button.innerHTML = answer.text;
+          button.classList.add("btn");
+          answerButtons.appendChild(button);
+
+          if (answer.correct) {
+            button.dataset.correct = answer.correct;
+          }
+
+          button.addEventListener("click", selectAnswer);
+        });
+      }
+
+      function resetState() {
+        nextButton.style.display = "none";
+        while (answerButtons.firstChild) {
+          answerButtons.removeChild(answerButtons.firstChild);
+        }
+      }
+
+      function selectAnswer(e) {
+        const selectedBtn = e.target;
+        const isCorrect = selectedBtn.dataset.correct === "true";
+        Array.from(answerButtons.children).forEach((button) => {
+          button.classList.remove("correct");
+        });
+
+        selectedBtn.classList.add("correct");
+        if (isCorrect) {
+          selectedBtn.classList.add("correct");
+          score++;
+        }
+        // selectedBtn.classList.add("incorrect");
+
+        nextButton.style.display = "block";
+      }
+
+      function showScore() {
+        resetState();
+        questionElement.innerHTML = `You Scored ${score} out of ${questions.length}! 🥳`;
+
+        // nextButton.innerHTML = "Show Result";
+        // nextButton.style.display = "block";
+        localStorage.setItem("totalAptiScore", score);
+
+        resultButton.style.display = "block";
+      }
+
+      function handleNextButton() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          showQuestion();
+        } else {
+          showScore();
+        }
+      }
+      nextButton.addEventListener("click", () => {
+        if (currentQuestionIndex < questions.length) {
+          handleNextButton();
+        } else {
+          startQuiz();
+        }
+      });
+      startQuiz();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Script for google translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: "en" },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+  </body>
+</html>

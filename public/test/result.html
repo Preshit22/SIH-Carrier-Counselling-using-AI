@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <!-- Style for google translate -->
+    <style>
+      body > .skiptranslate {
+        display: none;
+      }
+      /* ---------------- */
+      @media print {
+        /* Hide elements with the class 'no-print' for reultPrint function */
+        .no-print {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="no-print text-gray-600 body-font">
+      <nav
+        class="bg-transparent fixed w-full z-20 top-0 start-0 border-b border-gray-200 bg-opacity-30 backdrop-filter backdrop-blur-lg"
+      >
+        <div
+          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+        >
+          <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="/img/logo.png" class="h-10" alt="Flowbite Logo" />
+            <span
+              class="self-center hidden sm:block text-2xl font-semibold whitespace-nowrap dark:text-black"
+              >AI Guruji</span
+            >
+          </a>
+
+          <div
+            id="loggedInContent"
+            style="display: none"
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <button
+              onclick="localStorage.setItem('login', 'false'); window.location.reload();"
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+              type="button"
+            >
+              Sign Out
+            </button>
+          </div>
+
+          <div
+            id="notLoggedInContent"
+            style="display: none"
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <button
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+              type="button"
+            >
+              Sign in
+              <svg
+                class="w-2.5 h-2.5 ms-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+          </div>
+          <!-- Dropdown menu -->
+          <div
+            id="dropdown"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700"
+              aria-labelledby="dropdownDefaultButton"
+            >
+              <li>
+                <a
+                  href="/studentLogin"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                  >Student
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/parentLogin"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                  >Parent
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <button
+            data-collapse-toggle="navbar-sticky"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-200"
+            aria-controls="navbar-sticky"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+
+          <div
+            class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="navbar-sticky"
+          >
+            <ul
+              class="flex flex-col items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:border-gray-200"
+            >
+              <li>
+                <a
+                  href="/"
+                  class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Home</a
+                >
+              </li>
+
+              <li>
+                <a
+                  href="../test/result.html"
+                  class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Results</a
+                >
+              </li>
+
+              <li>
+                <button
+                  id="dropdownDefaultButton"
+                  data-dropdown-toggle="langdropdown"
+                  class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  type="button"
+                >
+                  Language
+                  <svg
+                    class="w-2.5 h-2.5 ms-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+
+                <!-- Dropdown menu -->
+                <div
+                  id="langdropdown"
+                  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-[white] border border-gray-300"
+                >
+                  <ul
+                    class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownDefaultButton"
+                  >
+                    <li>
+                      <div class="p-0" id="google_translate_element"></div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="loader flex justify-center items-center mt-[300px]">
+      <h1
+        class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"
+      >
+        Loading...
+      </h1>
+    </div>
+
+    <div class="mainContainer hidden">
+      <div class="myContainer">
+        <div class="hero">
+          <section
+            class="no-print bg-white mt-[100px] m-auto w-[90%] rounded-lg shadow"
+          >
+            <hr class="h-3 bg-green-500 rounded-t-lg" />
+
+            <div
+              class="py-8 px-4 mx-auto flex flex-col lg:flex-row items-center max-w-screen-xl sm:py-16 lg:px-6"
+            >
+              <img
+                src="../img/congrats.jpg"
+                class="sm:h-[200px] h-auto"
+                alt=""
+              />
+              <div class="w-full sm:w-[60%] lg:ml-10 text-center lg:text-left">
+                <h2
+                  class="mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-700"
+                >
+                  Mayuri Sarda
+                </h2>
+                <p
+                  class="mb-6 font-light text-gray-500 dark:text-gray-700 md:text-xl"
+                >
+                  You have Completed Your 5-Dimensional
+                </p>
+                <p
+                  class="mb-6 font-light text-gray-500 dark:text-gray-700 md:text-xl"
+                >
+                  The most recent assessment was completed on 20/12/23.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section class="text-gray-600 body-font">
+            <div class="container px-5 py-24 mx-auto">
+              <div class="flex flex-col text-center w-full mb-10">
+                <h1
+                  class="mb-5 mt-1 text-center text-4xl font-bold leading-none tracking-tight text-gray-800 md:text-2xl lg:text-3xl"
+                >
+                  Your Top Career Matches
+                </h1>
+
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+                  After completing your comprehensive 4-dimensional test, we've
+                  analyzed your unique combination of psychometric, aptitude,
+                  interest, and hobbies/personality scores. Based on these
+                  insights, we're excited to present your top 3 career matches.
+                  These recommendations are tailored to align with your
+                  strengths, interests, and aspirations, providing you with
+                  exciting possibilities for your future career journey.
+                </p>
+              </div>
+
+              <section class="text-gray-600 body-font overflow-hidden">
+                <div class="container px-5 py-24 mx-auto">
+                  <div class="mx-auto flex flex-col lg:flex-row justify-around">
+                    <img
+                      alt="ecommerce"
+                      class="lg:w-1/3 w-full lg:h-auto h-[350px] object-cover object-center rounded"
+                      src="../img/career1.png"
+                    />
+                    <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                      <h1
+                        class="text-gray-900 text-2xl title-font font-medium mb-1"
+                      >
+                        Top 3 Conventional Career Matches For You
+                      </h1>
+                      <div class="">
+                        <div class="p-2 w-full">
+                          <div
+                            class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+                          >
+                            <div class="flex-grow">
+                              <h2
+                                class="top1Head text-gray-700 title-font font-bold text-lg lg:text-2xl"
+                              >
+                                Top1
+                              </h2>
+                              <a
+                                href="../test/science.html"
+                                target="_blank"
+                                class="text-blue-500 ml-10"
+                                >Detailed Career Path</a
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="p-2 w-full">
+                          <div
+                            class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+                          >
+                            <div class="flex-grow">
+                              <h2
+                                class="top2Head text-gray-700 title-font font-bold text-lg lg:text-2xl"
+                              >
+                                Top2
+                              </h2>
+                              <a
+                                href="../test/engineering.html"
+                                target="_blank"
+                                class="text-blue-500 ml-10"
+                                >Detailed Career Path</a
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="p-2 w-full">
+                          <div
+                            class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+                          >
+                            <div class="flex-grow">
+                              <h2
+                                class="top3Head text-gray-700 title-font font-bold text-lg lg:text-2xl"
+                              >
+                                Top3
+                              </h2>
+                              <a
+                                href="#"
+                                target="_blank"
+                                class="text-blue-500 ml-10"
+                                >Detailed Career Path</a
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <h1
+                class="mb-10 mt-10 text-center text-2xl font-semibold leading-none tracking-tight text-gray-600 md:text-2xl lg:text-2xl"
+              >
+                Top 3 Non-Conventional Career Matches For You
+              </h1>
+              <div class="flex flex-wrap -m-2">
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                  <div
+                    class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+                  >
+                    <img
+                      alt="team"
+                      class="w-24 h-24 bg-gray-100 object-cover object-center flex-shrink-0 rounded-md mr-4"
+                      src="../img/top1.png"
+                    />
+                    <div class="flex-grow">
+                      <h2
+                        class="top1HeadNonConv text-gray-900 title-font font-bold text-xl"
+                      >
+                        Top1
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                  <div
+                    class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+                  >
+                    <img
+                      alt="team"
+                      class="w-24 h-24 bg-gray-100 object-cover object-center flex-shrink-0 rounded-md mr-4"
+                      src="../img/top2.png"
+                    />
+                    <div class="flex-grow">
+                      <h2
+                        class="top2HeadNonConv text-gray-900 title-font font-bold text-xl"
+                      >
+                        Top2
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                  <div
+                    class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+                  >
+                    <img
+                      alt="team"
+                      class="w-24 h-24 bg-gray-100 object-cover object-center flex-shrink-0 rounded-md mr-4"
+                      src="../img/top3.png"
+                    />
+                    <div class="flex-grow">
+                      <h2
+                        class="top3HeadNonConv text-gray-900 title-font font-bold text-xl"
+                      >
+                        Top3
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <h1
+          class="mb-10 text-center text-4xl font-bold leading-none tracking-tight text-gray-800 md:text-2xl lg:text-3xl"
+        >
+          Detailed Result
+        </h1>
+        <hr class="w-[80%] m-auto" />
+
+        <section class="psychoSection text-gray-600 body-font overflow-hidden">
+          <div class="container px-1 py-24 mx-auto">
+            <div
+              class="lg:w-full mx-auto flex justify-around flex-wrap-reverse"
+            >
+              <div class="w-full mt-10 lg:mt-0 lg:w-[40%]">
+                <div class="psychoDiv">
+                  <div class="graph flex justify-center">
+                    <div class="w-full bg-white rounded-lg shadow p-4 md:p-6">
+                      <div id="column-chart"></div>
+                      <div
+                        class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="lg:w-1/2 w-full text-center px-5 lg:px-0 lg:text-left lg:pl-10 lg:py-6 mt-0 lg:mt-0"
+              >
+                <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
+                  Psychometric Test
+                </h1>
+
+                <p class="leading-relaxed">
+                  Explore your unique strengths in personality, emotional
+                  intelligence, and cognitive abilities through our Psychometric
+                  Test. A detailed bar graph provides a quick overview,
+                  empowering you to make informed career choices aligned with
+                  your distinct qualities.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="w-[80%] m-auto" />
+
+        <div class="hobbieDiv w-full mt-[50px]">
+          <div class="text-center p-3 lg:p-0 mb-20">
+            <h1
+              class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4"
+            >
+              Hobbies | Personality
+            </h1>
+            <p
+              class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s"
+            >
+              In the this section, we delve into the unique blend of your
+              hobbies and personality traits to provide a holistic understanding
+              of your character. Discover how your interests and personal
+              characteristics contribute to your overall profile, guiding you
+              towards careers that resonate with your passions. This
+              personalized analysis goes beyond conventional assessments,
+              offering a nuanced perspective on how your hobbies and personality
+              traits shape your professional path.
+            </p>
+          </div>
+
+          <div class="graph flex justify-center">
+            <div
+              class="max-w-[1200px] w-[95%] bg-white rounded-lg shadow p-4 md:p-6"
+            >
+              <div id="column-chart-hobbie"></div>
+              <div
+                class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="w-[80%] mt-[60px] m-auto mb-[-60px]" />
+
+        <section class="aptiSection text-gray-600 body-font overflow-hidden">
+          <div class="container px-5 py-24 mx-auto">
+            <div
+              class="lg:w-full mx-auto flex flex-row-reverse justify-around items-center flex-wrap-reverse"
+            >
+              <div class="w-[95%] lg:w-[40%]">
+                <div class="aptiDiv">
+                  <h1
+                    class="mb-10 text-center text-4xl font-bold leading-none tracking-tight text-gray-800 md:text-2xl lg:text-3xl"
+                  ></h1>
+                  <div
+                    class="graph result flex justify-center m-0 lg:m-10 mt-[10px]"
+                  >
+                    <div
+                      class="max-w-[500px] w-full bg-white rounded-lg p-4 md:p-6"
+                    >
+                      <div class="py-6" id="pie-chart"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="lg:w-1/2 text-center lg:text-left w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0"
+              >
+                <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
+                  Aptitude Test Detailed Analysis
+                </h1>
+
+                <p class="leading-relaxed">
+                  Discover your natural talents and problem-solving skills with
+                  our Aptitude Test, guiding you toward careers that align
+                  seamlessly with your unique capabilities for optimal success.
+                  Uncover hidden strengths and fine-tune your cognitive skills
+                  to enhance your problem-solving prowess for a more confident
+                  and successful career journey.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="w-[80%] m-auto" />
+
+        <section
+          class="interestSection text-gray-600 body-font overflow-hidden"
+        >
+          <div class="container px-5 py-24 mx-auto">
+            <div
+              class="lg:w-full mx-auto flex justify-around flex-wrap-reverse"
+            >
+              <div class="w-[99%] lg:w-[40%]">
+                <div class="interestDiv">
+                  <div class="graph flex justify-center">
+                    <div
+                      class="max-w-lg w-full m-0 lg:m-4 bg-white shadow rounded-lg lg:p-4 py-2 md:p-6"
+                    >
+                      <div id="column-chart-interest"></div>
+                      <div
+                        class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-600 justify-between"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="lg:w-1/2 w-full text-center lg:text-left lg:pl-10 lg:py-6 mt-6 lg:mt-0"
+              >
+                <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
+                  Your Interest
+                </h1>
+
+                <p class="leading-relaxed">
+                  Discover your passions and hobbies with our Interest Test,
+                  guiding you toward fulfilling career paths aligned with your
+                  genuine enthusiasm for a more enjoyable professional journey.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="text-gray-600 mt-[-100px] body-font">
+          <div class="container px-5 py-24 mx-auto">
+            <div class="text-center mb-20">
+              <h1
+                class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4"
+              >
+                All Domains Percentage
+              </h1>
+            </div>
+            <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage1 title-font font-medium"
+                    >interestPercentage1</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage2 title-font font-medium"
+                    >interestPercentage2</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage3 title-font font-medium"
+                    >interestPercentage3</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage4 title-font font-medium"
+                    >interestPercentage4</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage5 title-font font-medium"
+                    >interestPercentage5</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage6 title-font font-medium"
+                    >interestPercentage6</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage7 title-font font-medium"
+                    >interestPercentage7</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage8 title-font font-medium"
+                    >Kinfolk Chips Snackwave</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage9 title-font font-medium"
+                    >Coloring Book Ethical</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage10 title-font font-medium"
+                    >Typewriter Polaroid Cray</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage11 title-font font-medium"
+                    >Pack Truffaut Blue</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage12 title-font font-medium"
+                    >The Catcher In The Rye</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span
+                    class="interestPercentage13 title-font font-medium"
+                  ></span>
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage14 title-font font-medium"
+                    >Kinfolk Chips Snackwave</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage15 title-font font-medium"
+                    >Coloring Book Ethical</span
+                  >
+                </div>
+              </div>
+              <div class="p-2 sm:w-1/3 w-full">
+                <div class="bg-gray-100 rounded flex p-4 h-full items-center">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    class="text-blue-700 w-6 h-6 flex-shrink-0 mr-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                    <path d="M22 4L12 14.01l-3-3"></path>
+                  </svg>
+                  <span class="interestPercentage16 title-font font-medium"
+                    >Typewriter Polaroid Cray</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <hr class="w-[80%] m-auto" />
+        <div
+          class="no-print flex flex-wrap w-[90%] justify-center mt-10 m-auto"
+        >
+          <div class="no-print p-2 lg:w-1/3 md:w-1/2 w-full">
+            <a href="http://localhost:8000/" target="_blank">
+              <div
+                class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+              >
+                <img
+                  alt="team"
+                  class="w-24 h-24 bg-gray-100 object-cover object-center flex-shrink-0 rounded-md mr-4"
+                  src="../img/bot.png"
+                />
+                <div class="flex-grow">
+                  <h2
+                    class="top1Head text-gray-900 title-font font-bold text-xl"
+                  >
+                    Chat With Bot
+                  </h2>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="no-print p-2 lg:w-1/3 md:w-1/2 w-full">
+            <a href="http://localhost:3000/test/expert.html">
+              <div
+                class="h-full flex items-center border-gray-200 border p-4 rounded-lg"
+              >
+                <img
+                  alt="team"
+                  class="w-20 h-20 bg-gray-100 object-cover object-center flex-shrink-0 rounded-md mr-4"
+                  src="../img/counsellor.png"
+                />
+                <div class="flex-grow">
+                  <h2
+                    class="top2Head text-gray-900 title-font font-bold text-xl"
+                  >
+                    Consult With Counsellor
+                  </h2>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="flex justify-center items-center p-10">
+          <button
+            onclick="printResult()"
+            class="no-print text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
+            type="button"
+          >
+            Download Result
+          </button>
+          <a href="/test/feedback.html">
+            <button
+              class="ml-10 no-print text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
+              type="button"
+            >
+              Give Us Feedback
+            </button></a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+      // Loading ... functionality
+      window.addEventListener("load", (event) => {
+        document.querySelector(".mainContainer").style.display = "block";
+        document.querySelector(".loader").style.display = "none";
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if 'login' item exists in local storage
+        if (
+          localStorage.getItem("login") === "true" &&
+          localStorage.getItem("isPremiumUser") === "true"
+        ) {
+          document.getElementById("loggedInContent").style.display = "block";
+          document.getElementById("notLoggedInContent").style.display = "none";
+          document.querySelector(".myContainer").style.display = "block";
+        } else {
+          document.getElementById("loggedInContent").style.display = "none";
+          document.getElementById("notLoggedInContent").style.display = "block";
+          document.querySelector(".myContainer").style.display = "none";
+        }
+      });
+
+      function printResult() {
+        // Open the print dialog
+        window.print();
+      }
+    </script>
+
+    <!-- Aptitude Graph Script -->
+    <script>
+      // ApexCharts options and config
+      let totalAptiScore = localStorage.getItem("totalAptiScore");
+      totalAptiScore = parseInt(totalAptiScore, 10);
+      let totalQuestion = 35;
+      let correct = totalAptiScore;
+      let incorrect = totalQuestion - totalAptiScore;
+
+      window.addEventListener("load", function () {
+        const getChartOptions = () => {
+          return {
+            series: [
+              parseInt(localStorage.getItem("totalAptiScore"), 10),
+              totalQuestion -
+                parseInt(localStorage.getItem("totalAptiScore"), 10),
+            ],
+            colors: ["#35df6b", "#df3535"],
+            chart: {
+              height: 420,
+              width: "100%",
+              type: "pie",
+            },
+            stroke: {
+              colors: ["white"],
+              lineCap: "",
+            },
+            plotOptions: {
+              pie: {
+                labels: {
+                  show: true,
+                },
+                size: "100%",
+                dataLabels: {
+                  offset: -25,
+                },
+              },
+            },
+            labels: ["Correct", "Incorrect"],
+            dataLabels: {
+              enabled: true,
+              style: {
+                fontFamily: "Inter, sans-serif",
+              },
+            },
+            legend: {
+              position: "bottom",
+              fontFamily: "Inter, sans-serif",
+            },
+            yaxis: {
+              labels: {
+                formatter: function (value) {
+                  return value;
+                },
+              },
+            },
+            xaxis: {
+              labels: {
+                formatter: function (value) {
+                  return value;
+                },
+              },
+              axisTicks: {
+                show: false,
+              },
+              axisBorder: {
+                show: false,
+              },
+            },
+          };
+        };
+
+        if (
+          document.getElementById("pie-chart") &&
+          typeof ApexCharts !== "undefined"
+        ) {
+          const chart = new ApexCharts(
+            document.getElementById("pie-chart"),
+            getChartOptions()
+          );
+          chart.render();
+        }
+      });
+    </script>
+
+    <!-- Psychometric Test Script -->
+    <script>
+      // Parse the JSON string into a JavaScript object
+      let psychoTestScores = JSON.parse(
+        localStorage.getItem("psychoTestScores")
+      );
+
+      // Access individual scores
+      let knowledgeOrientation = psychoTestScores["Knowledge Orientation"];
+      let practicalOrientation = psychoTestScores["Practical Orientation"];
+      let artisticOrientation = psychoTestScores["Artistic Orientation"];
+      let socialOrientation = psychoTestScores["Social Orientation"];
+      let powerOrientation = psychoTestScores["Power Orientation"];
+      let totalScore = psychoTestScores["Total Score"];
+      let totalScoreForEachSectionPsycho = 20;
+
+      // ApexCharts options and config
+      window.addEventListener("load", function () {
+        const options = {
+          colors: ["#FDBA8C"],
+          series: [
+            {
+              name: "Percentage",
+              color: "#16BDCA",
+              data: [
+                {
+                  x: "Knowledge",
+                  y: `${
+                    (knowledgeOrientation / totalScoreForEachSectionPsycho) *
+                    100
+                  }`,
+                },
+                // { x: "Practical", y: practicalOrientation },
+                {
+                  x: "Artistic",
+                  y: `${
+                    (artisticOrientation / totalScoreForEachSectionPsycho) * 100
+                  }`,
+                },
+                {
+                  x: "Social",
+                  y: `${
+                    (socialOrientation / totalScoreForEachSectionPsycho) * 100
+                  }`,
+                },
+                {
+                  x: "Power",
+                  y: `${
+                    (powerOrientation / totalScoreForEachSectionPsycho) * 100
+                  }`,
+                },
+              ],
+            },
+          ],
+          chart: {
+            type: "bar",
+            height: "320px",
+            fontFamily: "Inter, sans-serif",
+            toolbar: {
+              show: false,
+            },
+          },
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: "50%",
+              borderRadiusApplication: "end",
+              borderRadius: 1,
+            },
+          },
+          tooltip: {
+            shared: true,
+            intersect: false,
+            style: {
+              fontFamily: "Inter, sans-serif",
+            },
+          },
+          states: {
+            hover: {
+              filter: {
+                type: "darken",
+                value: 1,
+              },
+            },
+          },
+          stroke: {
+            show: true,
+            width: 0,
+            colors: ["transparent"],
+          },
+          grid: {
+            show: false,
+            strokeDashArray: 4,
+            padding: {
+              left: 2,
+              right: 2,
+              top: -14,
+            },
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          legend: {
+            show: false,
+          },
+          xaxis: {
+            floating: false,
+            labels: {
+              show: true,
+              style: {
+                fontFamily: "Inter, sans-serif",
+                cssClass:
+                  "text-xs  font-normal fill-gray-300 dark:fill-gray-800",
+              },
+            },
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+          },
+          yaxis: {
+            show: false,
+          },
+          fill: {
+            opacity: 1,
+          },
+        };
+
+        if (
+          document.getElementById("column-chart") &&
+          typeof ApexCharts !== "undefined"
+        ) {
+          const chart = new ApexCharts(
+            document.getElementById("column-chart"),
+            options
+          );
+          chart.render();
+        }
+      });
+    </script>
+
+    <!-- Hobbies Test Script -->
+    <script>
+      // Parse the JSON string into a JavaScript object
+      let hobbiesTestScores = JSON.parse(
+        localStorage.getItem("hobbiesTestScores")
+      );
+
+      // Access individual scores
+      let Coding = hobbiesTestScores["Coding/Programming"];
+      let Art = hobbiesTestScores["Art and Drawing"];
+      let Strategy_Games = hobbiesTestScores["Chess and Strategy Games"];
+      let Collecting = hobbiesTestScores["Collecting"];
+      let Creative_Writing = hobbiesTestScores["Creative Writing"];
+      let Culinary_Arts = hobbiesTestScores["Culinary Arts"];
+      let Gardening = hobbiesTestScores["Gardening"];
+      let Music = hobbiesTestScores["Music"];
+      let Outdoor_Activities = hobbiesTestScores["Outdoor Activities"];
+      let Photography = hobbiesTestScores["Photography"];
+      let Reading_Writing = hobbiesTestScores["Reading/Writing"];
+      let Science_Robotics = hobbiesTestScores["Science and Robotics"];
+      let Social_Activities =
+        hobbiesTestScores["Social Activities and Volunteering"];
+      let Technology = hobbiesTestScores["Technology"];
+      let totalHobbieTestScore = hobbiesTestScores["Total Score"];
+
+      let totalScoreForEachSectionHobbies = 8;
+      // ApexCharts options and config
+      window.addEventListener("load", function () {
+        const options = {
+          colors: ["#FDBA8C"],
+          series: [
+            {
+              name: "Percentage",
+              color: "#1A56DB",
+              data: [
+                {
+                  x: "Coding",
+                  y: `${(Coding / totalScoreForEachSectionHobbies) * 100}`,
+                },
+                {
+                  x: "Art",
+                  y: `${(Art / totalScoreForEachSectionHobbies) * 100}`,
+                },
+                {
+                  x: "Strategy",
+                  y: `${
+                    (Strategy_Games / totalScoreForEachSectionHobbies) * 100
+                  }`,
+                },
+                {
+                  x: "Social",
+                  y: `${
+                    (Social_Activities / totalScoreForEachSectionHobbies) * 100
+                  }`,
+                },
+                {
+                  x: "Collecting",
+                  y: `${(Collecting / totalScoreForEachSectionHobbies) * 100}`,
+                },
+                {
+                  x: "Writing",
+                  y: `${
+                    (Reading_Writing / totalScoreForEachSectionHobbies) * 100
+                  }`,
+                },
+                {
+                  x: "Culinary",
+                  y: `${
+                    (Culinary_Arts / totalScoreForEachSectionHobbies) * 100
+                  }`,
+                },
+                {
+                  x: "Gardening",
+                  y: `${(Gardening / totalScoreForEachSectionHobbies) * 100}`,
+                },
+                {
+                  x: "Music",
+                  y: `${(Music / totalScoreForEachSectionHobbies) * 100}`,
+                },
+                {
+                  x: "Outdoor",
+                  y: `${
+                    (Outdoor_Activities / totalScoreForEachSectionHobbies) * 100
+                  }`,
+                },
+                {
+                  x: "Photography",
+                  y: `${(Photography / totalScoreForEachSectionHobbies) * 100}`,
+                },
+                {
+                  x: "Reading",
+                  y: `${
+                    (Reading_Writing / totalScoreForEachSectionHobbies) * 100
+                  }`,
+                },
+                {
+                  x: "Science",
+                  y: `${(Science / totalScoreForEachSectionHobbies) * 100}`,
+                },
+
+                {
+                  x: "Technology",
+                  y: `${(Art / totalScoreForEachSectionHobbies) * 100}`,
+                },
+              ],
+            },
+          ],
+          chart: {
+            type: "bar",
+            height: "320px",
+            fontFamily: "Inter, sans-serif",
+            toolbar: {
+              show: false,
+            },
+          },
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: "70%",
+              borderRadiusApplication: "end",
+              borderRadius: 1,
+            },
+          },
+          tooltip: {
+            shared: true,
+            intersect: false,
+            style: {
+              fontFamily: "Inter, sans-serif",
+            },
+          },
+          states: {
+            hover: {
+              filter: {
+                type: "darken",
+                value: 1,
+              },
+            },
+          },
+          stroke: {
+            show: true,
+            width: 0,
+            colors: ["transparent"],
+          },
+          grid: {
+            show: false,
+            strokeDashArray: 4,
+            padding: {
+              left: 2,
+              right: 2,
+              top: -14,
+            },
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          legend: {
+            show: false,
+          },
+          xaxis: {
+            floating: false,
+            labels: {
+              show: true,
+              style: {
+                fontFamily: "Inter, sans-serif",
+                cssClass:
+                  "text-[5px] sm:text-[10px] lg:text-xs font-normal fill-gray-800 dark:fill-gray-800",
+              },
+            },
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+          },
+          yaxis: {
+            show: false,
+          },
+          fill: {
+            opacity: 1,
+          },
+        };
+
+        if (
+          document.getElementById("column-chart-hobbie") &&
+          typeof ApexCharts !== "undefined"
+        ) {
+          const chart = new ApexCharts(
+            document.getElementById("column-chart-hobbie"),
+            options
+          );
+          chart.render();
+        }
+      });
+    </script>
+
+    <!-- Interest Test Script -->
+    <script>
+      // Parse the JSON string into a JavaScript object
+      let interestTestScores = JSON.parse(
+        localStorage.getItem("interestTestScores")
+      );
+
+      // Access individual scores
+      let Agriculture = interestTestScores["Agriculture"];
+      let Architecture = interestTestScores["Architecture"];
+      let Bio_Technology = interestTestScores["Bio Technology"];
+      let Commerce = interestTestScores["Commerce"];
+      let Computer_Science = interestTestScores["Computer Science"];
+      let Defense = interestTestScores["Defense"];
+      let Engineering = interestTestScores["Engineering"];
+      let Fine_Arts = interestTestScores["Fine Arts & Design"];
+      let Hotel_Management = interestTestScores["Hotel Management"];
+      let Journalism = interestTestScores["Journalism"];
+      let Law = interestTestScores["Law"];
+      let Management = interestTestScores["Management"];
+      let Medical = interestTestScores["Medical"];
+      let Merchant_Navy = interestTestScores["Merchant Navy"];
+      let Physical_Education = interestTestScores["Physical Education"];
+      let Science = interestTestScores["Science"];
+      let AIML = interestTestScores["AIML"];
+      let totalInterestTestScore = hobbiesTestScores["Total Score"];
+
+      // To get top 5 field of interest
+      // Convert object to array for sorting
+      let scoresArray = Object.entries(interestTestScores);
+
+      // Sort the array by scores in descending order
+      scoresArray.sort((a, b) => b[1] - a[1]);
+
+      // Get the top 5 scores and their interests
+      let top5Scores = scoresArray.slice(0, 6);
+
+      let totalScoreForEachSection = 5;
+      // Extract the top 5 interests and scores
+      let top0 = top5Scores[0][0];
+      let top0Score = top5Scores[0][1];
+
+      let top1 = top5Scores[1][0];
+      let top1Score =
+        top5Scores[1][1] > totalScoreForEachSection
+          ? totalScoreForEachSection
+          : top5Scores[1][1];
+
+      let top2 = top5Scores[2][0];
+      let top2Score =
+        top5Scores[2][1] > totalScoreForEachSection
+          ? totalScoreForEachSection
+          : top5Scores[2][1];
+
+      let top3 = top5Scores[3][0];
+      let top3Score =
+        top5Scores[3][1] > totalScoreForEachSection
+          ? totalScoreForEachSection
+          : top5Scores[3][1];
+
+      let top4 = top5Scores[4][0];
+      let top4Score = top5Scores[4][1];
+
+      let top5 = top5Scores[5][0];
+      let top5Score = top5Scores[5][1];
+
+      let top1Head = document.querySelector(".top1Head");
+      let top2Head = document.querySelector(".top2Head");
+      let top3Head = document.querySelector(".top3Head");
+      top1Head.innerHTML = `🥇 ${top1}   - ${
+        (top1Score / totalScoreForEachSection) * 100
+      }%`;
+      top2Head.innerHTML = `🥈 ${top2}   - ${
+        (top2Score / totalScoreForEachSection) * 100
+      }%`;
+      top3Head.innerHTML = `🥉 ${top3}  - ${
+        (top3Score / totalScoreForEachSection) * 100
+      }%`;
+
+      console.log("Top 1:", top1, top1Score);
+      console.log("Top 2:", top2, top2Score);
+      console.log("Top 3:", top3, top3Score);
+      console.log("Top 4:", top4, top4Score);
+      console.log("Top 5:", top5, top5Score);
+
+      // ApexCharts options and config
+      window.addEventListener("load", function () {
+        const options = {
+          colors: ["#FDBA8C"],
+          series: [
+            {
+              name: "Percentage",
+              color: "#9061F9",
+              data: [
+                { x: top1, y: (top1Score / totalScoreForEachSection) * 100 },
+                { x: top2, y: (top2Score / totalScoreForEachSection) * 100 },
+                { x: top3, y: (top3Score / totalScoreForEachSection) * 100 },
+                { x: top4, y: (top4Score / totalScoreForEachSection) * 100 },
+                { x: top5, y: (top5Score / totalScoreForEachSection) * 100 },
+              ],
+            },
+          ],
+          chart: {
+            type: "bar",
+            height: "320px",
+            fontFamily: "Inter, sans-serif",
+            toolbar: {
+              show: false,
+            },
+          },
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: "70%",
+              borderRadiusApplication: "end",
+              borderRadius: 7,
+            },
+          },
+          tooltip: {
+            shared: true,
+            intersect: false,
+            style: {
+              fontFamily: "Inter, sans-serif",
+            },
+          },
+          states: {
+            hover: {
+              filter: {
+                type: "darken",
+                value: 1,
+              },
+            },
+          },
+          stroke: {
+            show: true,
+            width: 0,
+            colors: ["transparent"],
+          },
+          grid: {
+            show: false,
+            strokeDashArray: 4,
+            padding: {
+              left: 2,
+              right: 2,
+              top: -14,
+            },
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          legend: {
+            show: false,
+          },
+          xaxis: {
+            floating: false,
+            labels: {
+              show: true,
+              style: {
+                fontFamily: "Inter, sans-serif",
+                cssClass:
+                  "text-[10px] lg:text-xs font-normal fill-gray-700 dark:fill-gray-700",
+              },
+            },
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+          },
+          yaxis: {
+            show: false,
+          },
+          fill: {
+            opacity: 1,
+          },
+        };
+
+        if (
+          document.getElementById("column-chart-interest") &&
+          typeof ApexCharts !== "undefined"
+        ) {
+          const chart = new ApexCharts(
+            document.getElementById("column-chart-interest"),
+            options
+          );
+          chart.render();
+        }
+      });
+
+      // interest all percentage
+      let interestPercentage1 = document.querySelector(".interestPercentage1");
+      let interestPercentage2 = document.querySelector(".interestPercentage2");
+      let interestPercentage3 = document.querySelector(".interestPercentage3");
+      let interestPercentage4 = document.querySelector(".interestPercentage4");
+      let interestPercentage5 = document.querySelector(".interestPercentage5");
+      let interestPercentage6 = document.querySelector(".interestPercentage6");
+      let interestPercentage7 = document.querySelector(".interestPercentage7");
+      let interestPercentage8 = document.querySelector(".interestPercentage8");
+      let interestPercentage9 = document.querySelector(".interestPercentage9");
+      let interestPercentage10 = document.querySelector(
+        ".interestPercentage10"
+      );
+      let interestPercentage11 = document.querySelector(
+        ".interestPercentage11"
+      );
+      let interestPercentage12 = document.querySelector(
+        ".interestPercentage12"
+      );
+      let interestPercentage13 = document.querySelector(
+        ".interestPercentage13"
+      );
+      let interestPercentage14 = document.querySelector(
+        ".interestPercentage14"
+      );
+      let interestPercentage15 = document.querySelector(
+        ".interestPercentage15"
+      );
+      let interestPercentage16 = document.querySelector(
+        ".interestPercentage16"
+      );
+
+      interestPercentage1.innerHTML = `AIML - ${
+        (AIML / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage2.textContent = `Agriculture - ${
+        (Agriculture / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage3.textContent = `Architecture - ${
+        (Architecture / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage4.textContent = `Bio Technology - ${
+        (Bio_Technology / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage5.textContent = `Commerce - ${
+        (Commerce / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage6.textContent = `Defense - ${
+        (Defense / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage7.textContent = `Engineering - ${
+        (Engineering / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage8.textContent = `Fine Arts & Design - ${
+        (Fine_Arts / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage9.textContent = `Hotel Management - ${
+        (Hotel_Management / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage10.textContent = `Journalism - ${
+        (Journalism / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage11.textContent = `Law - ${
+        (Law / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage12.textContent = `Management - ${
+        (Management / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage13.textContent = `Medical - ${
+        (Medical / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage14.textContent = `Merchant Navy - ${
+        (Merchant_Navy / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage15.textContent = `Physical Education - ${
+        (Physical_Education / totalScoreForEachSection) * 100
+      }%`;
+      interestPercentage16.textContent = `Science - ${
+        (Science / totalScoreForEachSection) * 100
+      }%`;
+    </script>
+
+    <!-- Non conventinal Test -->
+    <script>
+      let nonConventionalTestScores = JSON.parse(
+        localStorage.getItem("nonConventionalTestScores")
+      );
+
+      // Access individual scores
+      let Actor = nonConventionalTestScores["Actor"];
+      let Airline_Pilot = nonConventionalTestScores["Airline Pilot"];
+      let Animator = nonConventionalTestScores["Animator"];
+      let Chef = nonConventionalTestScores["Chef"];
+      let Civil_Services = nonConventionalTestScores["Civil Services"];
+      let Content_Creator = nonConventionalTestScores["Content Creator"];
+      let Digital_Marketer = nonConventionalTestScores["Digital Marketer"];
+      let Entrepreneur = nonConventionalTestScores["Entrepreneur"];
+      let Event_Management = nonConventionalTestScores["Event Management"];
+      let Film_Director = nonConventionalTestScores["Film Director"];
+      let Fitness_Trainer = nonConventionalTestScores["Fitness Trainer"];
+      let Gamer = nonConventionalTestScores["Gamer"];
+      let News_Reporter = nonConventionalTestScores["News Reporter"];
+      // let Photography = interestTestScores["Photography"];
+      let Professional_Travel_Blogger =
+        nonConventionalTestScores["Professional Travel Blogger"];
+      let Psychiatrist = nonConventionalTestScores["Psychiatrist "];
+      let Singer = nonConventionalTestScores["Singer"];
+      let Sketch_Artist = nonConventionalTestScores["Sketch Artist"];
+      let Stock_Analyst = nonConventionalTestScores["Stock Analyst"];
+      let Stylist = nonConventionalTestScores["Stylist"];
+
+      // To get top 5 field of interest
+      // Convert object to array for sorting
+      let scoresArrayNonConv = Object.entries(nonConventionalTestScores);
+
+      console.log(scoresArrayNonConv);
+      // Sort the array by scores in descending order
+      scoresArrayNonConv.sort((a, b) => b[1] - a[1]);
+
+      // Get the top 5 scores and their interests
+      let top5ScoresNonConv = scoresArrayNonConv.slice(0, 6);
+
+      let totalScoreForEachSectionNonConv = 5;
+      // Extract the top 5 interests and scores
+      let top0NonConv = top5ScoresNonConv[0][0];
+      let top0ScoreNonConv = top5ScoresNonConv[0][1];
+
+      let top1NonConv = top5ScoresNonConv[1][0];
+      let top1ScoreNonConv =
+        top5ScoresNonConv[1][1] > totalScoreForEachSectionNonConv
+          ? totalScoreForEachSectionNonConv
+          : top5ScoresNonConv[1][1];
+
+      let top2NonConv = top5ScoresNonConv[2][0];
+      let top2ScoreNonConv =
+        top5ScoresNonConv[2][1] > totalScoreForEachSectionNonConv
+          ? totalScoreForEachSectionNonConv
+          : top5ScoresNonConv[2][1];
+
+      let top3NonConv = top5ScoresNonConv[3][0];
+      let top3ScoreNonConv =
+        top5ScoresNonConv[3][1] > totalScoreForEachSectionNonConv
+          ? totalScoreForEachSectionNonConv
+          : top5ScoresNonConv[3][1];
+
+      let top4NonConv = top5ScoresNonConv[4][0];
+      let top4ScoreNonConv = top5ScoresNonConv[4][1];
+
+      let top5NonConv = top5ScoresNonConv[5][0];
+      let top5ScoreNonConv = top5ScoresNonConv[5][1];
+
+      let top1HeadNonConv = document.querySelector(".top1HeadNonConv");
+      let top2HeadNonConv = document.querySelector(".top2HeadNonConv");
+      let top3HeadNonConv = document.querySelector(".top3HeadNonConv");
+      top1HeadNonConv.innerHTML = `${top1NonConv} <br> Percentage - ${
+        (top1ScoreNonConv / totalScoreForEachSection) * 100
+      }%`;
+      top2HeadNonConv.innerHTML = `${top2NonConv} <br> Percentage - ${
+        (top2ScoreNonConv / totalScoreForEachSection) * 100
+      }%`;
+      top3HeadNonConv.innerHTML = `${top3NonConv} <br> Percentage - ${
+        (top3ScoreNonConv / totalScoreForEachSection) * 100
+      }%`;
+    </script>
+    <!-- Script for google translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: "en" },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <!-- Script to Add data to database -->
+    <script>
+      const hobbiesTestScoresForDB = JSON.parse(
+        localStorage.getItem("hobbiesTestScores")
+      );
+      const nonConventionalTestScoresForDB = JSON.parse(
+        localStorage.getItem("nonConventionalTestScores")
+      );
+      const totalAptiScoreForDB = parseInt(
+        localStorage.getItem("totalAptiScore"),
+        10
+      );
+      const interestTestScoresForDB = JSON.parse(
+        localStorage.getItem("interestTestScores")
+      );
+      const psychoTestScoresForDB = JSON.parse(
+        localStorage.getItem("psychoTestScores")
+      );
+
+      const userIdentifierForDB = localStorage.getItem("userEmailId");
+
+      // Save scores to the database (replace this with actual database storage logic)
+
+      const reportsData = {
+        hobbiesTestScoresForDB,
+        nonConventionalTestScoresForDB,
+        totalAptiScoreForDB,
+        interestTestScoresForDB,
+        psychoTestScoresForDB,
+      };
+      // Function to fetch scores from localStorage
+      function fetchScores() {
+        saveToDatabase(userIdentifierForDB, reportsData);
+      }
+
+      // Simulated function to save data to the database (replace with actual logic)
+      function saveToDatabase(userIdentifierForDB, reportsData) {
+        // Replace the following line with actual code to save data to your database
+        const apiUrl = "test/result"; // Replace with your actual API endpoint
+
+        const dataToSend = {
+          userIdentifierForDB,
+          reportsData,
+        };
+
+        fetch("/test/result", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((responseData) => {
+            console.log("Data saved successfully:", responseData);
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+          });
+      }
+
+      // Call the fetchScores function to initiate the process
+
+      window.onload = function () {
+        fetchScores();
+      };
+
+      console.log("This is reports data");
+      console.log(reportsData);
+
+      // Function to create a text file and store data
+      function createTextFile(data, filename) {
+        const blob = new Blob([data], { type: "text/plain" });
+
+        saveAs(blob, filename);
+      }
+
+      // if (reportsData) {
+      //   const filename = "inputDataForBot.txt";
+      //   createTextFile(JSON.stringify(reportsData), filename);
+      // } else {
+      //   console.log("No data found in localStorage for the specified key.");
+      // }
+    </script>
+  </body>
+</html>

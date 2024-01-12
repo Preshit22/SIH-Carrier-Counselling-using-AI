@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+</head>
+<style>
+    .knowmorebsc {
+        display: none;
+    }
+
+    .knowmorebpharma {
+        display: none;
+    }
+
+    .knowmorebtech {
+        display: none;
+    }
+
+    .knowmorembbs {
+        display: none;
+    }
+
+    .knowmorebca {
+        display: none;
+    }
+</style>
+
+<body>
+    <header class="no-print text-gray-600 body-font">
+        <nav
+          class="bg-transparent fixed w-full z-20 top-0 start-0 border-b border-gray-200 bg-opacity-30 backdrop-filter backdrop-blur-lg"
+        >
+          <div
+            class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+          >
+            <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+              <img src="/img/logo.png" class="h-10" alt="Flowbite Logo" />
+              <span
+                class="self-center hidden sm:block text-2xl font-semibold whitespace-nowrap dark:text-black"
+                >AI Guruji</span
+              >
+            </a>
+  
+            <div
+              id="loggedInContent"
+              style="display: none"
+              class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+            >
+              <button
+                onclick="localStorage.setItem('login', 'false'); window.location.reload();"
+                id="dropdownDefaultButton"
+                data-dropdown-toggle="dropdown"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+                type="button"
+              >
+                Sign Out
+              </button>
+            </div>
+  
+            <div
+              id="notLoggedInContent"
+              style="display: none"
+              class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+            >
+              <button
+                id="dropdownDefaultButton"
+                data-dropdown-toggle="dropdown"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+                type="button"
+              >
+                Sign in
+                <svg
+                  class="w-2.5 h-2.5 ms-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+            </div>
+            <!-- Dropdown menu -->
+            <div
+              id="dropdown"
+              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+            >
+              <ul
+                class="py-2 text-sm text-gray-700"
+                aria-labelledby="dropdownDefaultButton"
+              >
+                <li>
+                  <a
+                    href="/studentLogin"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                    >Student
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/parentLogin"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                    >Parent
+                  </a>
+                </li>
+              </ul>
+            </div>
+  
+            <button
+              data-collapse-toggle="navbar-sticky"
+              type="button"
+              class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-200"
+              aria-controls="navbar-sticky"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
+  
+            <div
+              class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+              id="navbar-sticky"
+            >
+              <ul
+                class="flex flex-col items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:border-gray-200"
+              >
+                <li>
+                  <a
+                    href="/"
+                    class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    >Home</a
+                  >
+                </li>
+  
+                <li>
+                  <a
+                    href="../test/result.html"
+                    class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    >Results</a
+                  >
+                </li>
+  
+                <li>
+                  <button
+                    id="dropdownDefaultButton"
+                    data-dropdown-toggle="langdropdown"
+                    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button"
+                  >
+                    Language
+                    <svg
+                      class="w-2.5 h-2.5 ms-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 10 6"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m1 1 4 4 4-4"
+                      />
+                    </svg>
+                  </button>
+  
+                  <!-- Dropdown menu -->
+                  <div
+                    id="langdropdown"
+                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-[white] border border-gray-300"
+                  >
+                    <ul
+                      class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="dropdownDefaultButton"
+                    >
+                      <li>
+                        <div class="p-0" id="google_translate_element"></div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+    <div class="bg-white">
+        <div class="max-w-[1350px] mx-auto grid lg:grid-cols-2 gap-6 md:grid-cols-1">
+
+            <!-- card1 -->
+            <div class="relative h-full ml-0 mr-0 sm:mr-10 ">
+                <div class="relative isolate px-6 pt-14 lg:px-8">
+                    <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                        aria-hidden="true">
+                        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+                        </div>
+                    </div>
+                    <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+                        <div class="text-center">
+                            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">CAREER IN SCIENCE
+                            </h1>
+                            <p class="mt-6 text-lg leading-8 text-gray-600">
+                                Choosing a science career after the 10th grade involves specializing in streams like PCM
+                                or PCB, leading to higher secondary education. This path opens doors to diverse fields
+                                such as engineering, medicine, and biotechnology.
+                            </p>
+                        </div>
+                        <div class="mt-10 flex items-center justify-center gap-x-6">
+                            <a href="#knowmorebsc"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Read
+                                more</a>
+                        </div>
+                    </div>
+                    <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+                        aria-hidden="true">
+                        <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+                            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- card2 -->
+            <div class="relative h-full ml-0 md:mr-10 top-14">
+                <div class="mb-6 md:mb-0">
+                    <!-- Replace the iframe with an image -->
+                    <img src="../img/Science-PNG-Photos.png" alt="Image description"
+                        class="w-full h-auto md:h-[60vh] lg:h-[75vh] xl:h-[86vh] object-cover rounded-lg shadow-lg">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <br>
+
+    <!-- ################################################### -->
+
+
+
+    <div class="container flex flex-col mx-auto bg-white rounded-lg py-10">
+        <div class="container flex flex-col items-center gap-16 mx-auto ">
+            <div class="flex flex-col gap-7">
+                <hr class="border-t-2 border-gray-300 my-8">
+
+                <!-- NST Scholarship Information -->
+                <div class="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
+                    <h2 class="text-3xl font-extrabold leading-tight lg:text-4xl text-dark-grey-900">
+                        After 12th PCMB , PCB and PCM</h2>
+                    <p>
+                        PCMB stands for Physics, Chemistry, Mathematics, and Biology, a popular combination of subjects
+                        studied at the senior secondary level (12th grade) in many educational systems. This
+                        interdisciplinary stream allows students to explore a diverse range of scientific concepts,
+                        providing a strong foundation for various career paths, including engineering, medicine,
+                        research, and technology. <br>
+                        PCB is a subject combination typically chosen by students aspiring to pursue careers in
+                        medicine, healthcare, and life sciences. It includes in-depth study of physics, chemistry, and
+                        biology, providing a foundation for medical and biological disciplines.
+                        <br>
+                    </p>
+                    PCM is a subject combination chosen by students interested in engineering, technology, and physical
+                    sciences. It includes rigorous study of physics, chemistry, and mathematics, forming the basis for
+                    engineering, computer science, and other quantitative fields.
+
+
+                    <hr class="border-t-2 border-gray-300 my-8">
+
+
+                    <div id="knowmorebsc" class="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
+                        <h2 class="text-3xl font-extrabold leading-tight lg:text-4xl text-purple-900">
+                            B.Sc</h2>
+                        <p class="text-base font-medium leading-7 text-dark-grey-600">
+
+                            A Bachelor of Science (B.Sc) is an undergraduate academic degree awarded in various
+                            science-related disciplines. B.Sc programs typically provide students with a comprehensive
+                            understanding of scientific principles and methodologies.
+                        </p>
+                        <h2 class="text-xl text-purple-900 font-bold">Duration</h2>
+                        <p>The duration of a B.Sc program is typically three years, although it may vary based on the
+                            country and specific academic regulations.</p>
+                    </div>
+                </div>
+                <div class="max-w-[1350px] mx-auto grid lg:grid-cols-2 gap-6 md:grid-cols-1">
+                    <!-- Eligibility Criteria Card -->
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-yellow-500 rounded-lg"></span>
+                        <div class="relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <div class="flex items-center -mt-1">
+                                <h3 class="my-2 ml-3 text-3xl font-bold text-gray-800">B.Sc</h3>
+                            </div>
+                            <ul class="list-disc pl-8 text-gray-700">
+                                <h2 class="text-xl text-red-500">For B.Sc Admissions:</h2>
+                                <ul class="list-disc pl-8 text-gray-700">
+                                    <li>Must have completed 12th grade with Physics, Chemistry, and Mathematics (PCM)
+                                    </li>
+                                    <li>Various specializations available, including Physics, Chemistry, Mathematics,
+                                        Computer Science, and more</li>
+                                    <li>Opens up diverse career paths in research, technology, engineering, and more
+                                    </li>
+                                </ul>
+                                <div class="knowmorebsc">
+                                    <h2 class="text-xl text-red-500">Average Sallary in B.Sc:</h2>
+                                    <ul class="list-disc pl-8 text-gray-700">
+                                        <li>Salary ranges vary by specialization and industry</li>
+                                        <li>Computer Science: $50,000 - $100,000 per year</li>
+                                        <li>Engineering: $60,000 - $120,000 per year</li>
+                                        <li>Physics/Mathematics: $50,000 - $100,000 per year</li>
+                                        <li>Chemistry/Biochemistry: $45,000 - $90,000 per year</li>
+                                        <li>Environmental Science: $45,000 - $80,000 per year</li>
+                                        <li>Biotechnology: $50,000 - $100,000 per year</li>
+                                    </ul>
+                                </div>
+                            </ul>
+                            <button id="button1"
+                                class="mt-3 px-5 py-2 bg-rose-500 text-white duration-300 hover:bg-rose-700">Read
+                                more</button>
+                        </div>
+                    </div>
+
+
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg"></span>
+                        <div
+                            class=" flex items-center justify-center relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <iframe class="object-center" width="560" height="315"
+                                src="https://www.youtube.com/embed/ledCd6RCqzI?si=yob_5Ezzk6N8rpRR"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container flex flex-col mx-auto bg-white rounded-lg py-10">
+        <div class="container flex flex-col items-center gap-16 mx-auto ">
+            <div class="flex flex-col gap-7">
+
+                <!-- NST Scholarship Information -->
+                <div class="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
+                    <h2 class="text-3xl font-extrabold leading-tight lg:text-4xl text-purple-900">
+                        B.Pharmacy</h2>
+                    <p class="text-base font-medium leading-7 text-dark-grey-600">
+
+                        A Bachelor of Pharmacy (B.Pharmacy) is an undergraduate academic degree program that prepares
+                        students for a career in the pharmaceutical industry, healthcare, and related fields.
+                    <h3 class="text-xl text-purple-900 font-bold">Duration</h3>
+                    <p> The duration of a B.Pharmacy program is typically four years. Some universities or colleges may
+                        offer a three-year program for students who have completed a Diploma in Pharmacy (D.Pharmacy).
+                    </p>
+                    </p>
+
+                </div>
+
+
+                <!-- B.Pharmacy -->
+
+                <div class="max-w-[1350px] mx-auto grid lg:grid-cols-2 gap-6 md:grid-cols-1">
+                    <!-- Eligibility Criteria Card -->
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-yellow-500 rounded-lg"></span>
+                        <div class="relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <div class="flex items-center -mt-1">
+                                <h3 class="my-2 ml-3 text-3xl font-bold text-gray-800">B.Pharmacy</h3>
+                            </div>
+                            <ul class="list-disc pl-8 text-gray-700">
+                                <h2 class="text-xl text-red-500">For B.Pharmacy Admissions:</h2>
+                                <ul class="list-disc pl-8 text-gray-700">
+                                    <li>Must have completed 12th grade with Physics, Chemistry, and Mathematics (PCM)
+                                    </li>
+                                    <div>
+                                        <li>Specializations available:</li>
+                                        <ul class="list-disc pl-8 text-gray-700">
+                                            <li>Pharmaceutical Chemistry</li>
+                                            <li>Pharmacology</li>
+                                            <li>Pharmaceutics</li>
+                                            <li>Pharmacognosy</li>
+                                            <li>Pharmaceutical Analysis</li>
+                                            <li>Pharmaceutical Microbiology</li>
+                                            <li>Biochemistry</li>
+                                            <li>Pathophysiology</li>
+                                            <li>Medicinal Chemistry</li>
+                                            <li>Pharmaceutical Biotechnology</li>
+                                            <li>Clinical Pharmacy</li>
+                                            <li>Hospital Pharmacy</li>
+                                        </ul>
+                                        <li>Opens up diverse career paths in the pharmaceutical industry, healthcare,
+                                            and related fields</li>
+                                </ul>
+
+
+
+                            </ul>
+
+
+                            <button id="button2"
+                                class="mt-3 px-5 py-2 bg-rose-500 text-white duration-300 hover:bg-rose-700">
+                                Read more
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg"></span>
+                        <div
+                            class=" flex items-center justify-center relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/6zF9hdJJP7s?si=Osaa8z6B2gBObB9p"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+                <div class=" knowmorebpharma h-full ml-0 mr-0 sm:mr-10">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-indigo-500 rounded-lg"></span>
+                    <div class="relative h-full p-5 bg-white border-2 border-indigo-500 rounded-lg">
+                        <div>
+                            <h2 class="text-xl text-red-500">Average Salary in B.Pharmacy:</h2>
+                            <ul class="list-disc pl-8 text-gray-700">
+                                <li>Salary ranges vary by specialization and industry</li>
+                                <li>Pharmaceutical Chemistry: $50,000 - $70,000 per year</li>
+                                <li>Pharmacology: $50,000 - $70,000 per year</li>
+                                <li>Pharmaceutics: $60,000 - $90,000 per year</li>
+                                <li>Pharmacognosy: $50,000 - $70,000 per year</li>
+                                <li>Pharmaceutical Analysis: $55,000 - $80,000 per year</li>
+                                <li>Pharmaceutical Microbiology: $55,000 - $75,000 per year</li>
+                                <li>Biochemistry: $50,000 - $80,000 per year</li>
+                                <li>Pathophysiology: $60,000 - $90,000 per year</li>
+                                <li>Medicinal Chemistry: $50,000 - $70,000 per year</li>
+                                <li>Pharmaceutical Biotechnology: $60,000 - $80,000 per year</li>
+                                <li>Clinical Pharmacy: $90,000 - $120,000 per year</li>
+                                <li>Hospital Pharmacy: $90,000 - $120,000 per year</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+    <!-- B.Tech -->
+
+    <div class="container flex flex-col mx-auto bg-white rounded-lg py-10">
+        <div class="container flex flex-col items-center gap-16 mx-auto ">
+            <div class="flex flex-col gap-7">
+
+                <div class="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
+                    <h2 class="text-3xl font-extrabold leading-tight lg:text-4xl text-purple-900">
+                        B.Tech</h2>
+                    <p class="text-base font-medium leading-7 text-dark-grey-600">
+                        A Bachelor of Technology (B.Tech) is an undergraduate academic degree awarded in various
+                        engineering
+                        and technology fields. The B.Tech program typically spans four years and is designed to provide
+                        students with a strong foundation in engineering principles, technical skills, and
+                        problem-solving
+                        abilities.</p>
+                    <h2 class="text-xl text-purple-900 font-bold">Duration:</h2>
+                    <p>The B.Tech program usually has a duration of four years, although the duration may vary based on
+                        the
+                        country and specific engineering discipline.</p>
+                </div>
+
+                <div class="max-w-[1350px] mx-auto grid lg:grid-cols-2 gap-6 md:grid-cols-1">
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-yellow-500 rounded-lg"></span>
+                        <div class="relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <div class="flex items-center -mt-1">
+                                <h3 class="my-2 ml-3 text-3xl font-bold text-gray-800">B.Tech</h3>
+                            </div>
+                            <ul class="list-disc pl-8 text-gray-700">
+                                <h2 class="text-xl text-red-500">For B.Tech Admissions:</h2>
+                                <ul class="list-disc pl-8 text-gray-700">
+                                    <li>Must have completed 12th grade with Physics, Chemistry, and Mathematics (PCM)
+                                    </li>
+                                    <li>Various specializations available, including Electrical Engineering, Mechanical
+                                        Engineering, Computer Science, and more</li>
+                                    <li>Opens up diverse career paths in engineering, technology, and related fields
+                                    </li>
+                                </ul>
+                                <div class="knowmorebtech">
+                                    <h2 class="text-xl text-red-500">Average Salary in B.Tech:</h2>
+                                    <ul class="list-disc pl-8 text-gray-700">
+                                        <li>Salary ranges vary by specialization and industry</li>
+                                        <li>Electrical Engineering: $60,000 - $100,000 per year</li>
+                                        <li>Mechanical Engineering: $65,000 - $110,000 per year</li>
+                                        <li>Computer Science: $70,000 - $120,000 per year</li>
+
+                                        <li>Civil Engineering: $60,000 - $95,000 per year</li>
+                                        <li>Biotechnology: $55,000 - $90,000 per year</li>
+                                        <li>Aerospace Engineering: $70,000 - $110,000 per year</li>
+                                    </ul>
+                                </div>
+                            </ul>
+                            <button id="button3"
+                                class="mt-3 px-5 py-2 bg-rose-500 text-white duration-300 hover:bg-rose-700">Read more
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg"></span>
+                        <div
+                            class="flex items-center justify-center relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/IKYoRmaswwA?si=zN9Um4VIJSLNc6xA"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+
+
+
+    <div class="container flex flex-col mx-auto bg-white rounded-lg py-10">
+        <div class="container flex flex-col items-center gap-16 mx-auto ">
+            <div class="flex flex-col gap-7">
+
+                <div class="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
+                    <h2 class="text-3xl font-extrabold leading-tight lg:text-4xl text-purple-900">
+                        MBBS (Bachelor of Medicine, Bachelor of Surgery)</h2>
+                    <p class="text-base font-medium leading-7 text-dark-grey-600">
+                        MBBS is an undergraduate professional degree in the field of medicine and surgery. It is the primary
+                        medical qualification that is awarded in various countries. The program is designed to provide
+                        students
+                        with the knowledge and skills required to become competent medical professionals.
+                    </p>
+                    <h2 class="text-xl text-purple-900 font-bold">Duration:</h2>
+                    <p>The MBBS program typically has a duration of five to six years, including a compulsory internship
+                        period. The duration may vary based on the country's medical education system.</p>
+                </div>
+
+                <div class="max-w-[1350px] mx-auto grid lg:grid-cols-2 gap-6 md:grid-cols-1">
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-yellow-500 rounded-lg"></span>
+                        <div class="relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <div class="flex items-center -mt-1">
+                                <h3 class="my-2 ml-3 text-3xl font-bold text-gray-800">MBBS</h3>
+                            </div>
+                            <ul class="list-disc pl-8 text-gray-700">
+                                <h2 class="text-xl text-red-500">For MBBS Admissions:</h2>
+                                <ul class="list-disc pl-8 text-gray-700">
+                                    <li>Must have completed 12th grade with Physics, Chemistry, and Biology (PCB)</li>
+                                    <li>Entrance exams may be required for admission</li>
+                                    <li>Includes clinical rotations and practical training in medical settings</li>
+                                </ul>
+    
+                                <h2 class="text-xl text-red-500">Average Salary as a Doctor:</h2>
+                                <p>The salary of a doctor can vary widely based on factors such as specialization,
+                                    experience,
+                                    and location. On average, doctors can earn anywhere from $80,000 to $500,000 or more
+                                    per
+                                    year.</p>
+                                <div class="knowmorembbs">
+                                    <h2 class="text-xl text-red-900 font-bold">How to Become a Doctor:</h2>
+                                    <p>To become a doctor, follow these steps:</p>
+                                    <ol class="list-decimal pl-8 text-gray-700">
+                                        <li>Complete 12th grade with PCB.</li>
+                                        <li>Appear for medical entrance exams (e.g., NEET).</li>
+                                        <li>Enroll in a recognized medical college for the MBBS program.</li>
+                                        <li>Complete the internship and gain practical experience.</li>
+                                        <li>Register with the medical council to practice as a doctor.</li>
+                                        <li>Consider specialization through postgraduate studies.</li>
+                                    </ol>
+                            </ul>
+                            <button id="button4"
+                                class="mt-3 px-5 py-2 bg-rose-500 text-white duration-300 hover:bg-rose-700">Read more
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg"></span>
+                        <div
+                            class="flex items-center justify-center relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/T-xb3XvHaXY?si=d__jroAofUA3UlMS"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container flex flex-col mx-auto bg-white rounded-lg py-10">
+        <div class="container flex flex-col items-center gap-16 mx-auto ">
+            <div class="flex flex-col gap-7">
+
+                <div class="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
+                    <h2 class="text-3xl font-extrabold leading-tight lg:text-4xl text-purple-900">
+                        BCA (Bachelor of Computer Applications)</h2>
+                    <p class="text-base font-medium leading-7 text-dark-grey-600">
+                        BCA is an undergraduate professional degree in the field of computer applications. It focuses on
+                        providing students with a strong foundation in computer science and applications, preparing them for
+                        careers in software development, IT management, and more.
+                    </p>
+                    <h2 class="text-xl text-purple-900 font-bold">Duration:</h2>
+                    <p>The BCA program typically has a duration of three years. It includes theoretical courses, practical
+                        sessions, and projects to develop computer-related skills.</p>
+                </div>
+
+                <div class="max-w-[1350px] mx-auto grid lg:grid-cols-2 gap-6 md:grid-cols-1">
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-yellow-500 rounded-lg"></span>
+                        <div class="relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <div class="flex items-center -mt-1">
+                                <h3 class="my-2 ml-3 text-3xl font-bold text-gray-800">BCA</h3>
+                            </div>
+                            <ul class="list-disc pl-8 text-gray-700">
+                                <h2 class="text-xl text-red-500">For BCA Admissions:</h2>
+                                <ul class="list-disc pl-8 text-gray-700">
+                                    <li>Must have completed 12th grade with Mathematics or Computer Science</li>
+                                    <li>Some universities may conduct entrance exams for admission</li>
+                                    <li>Focus on programming languages, database management, and software development</li>
+                                </ul>
+                                <div class="knowmorebca">
+                                    <h2 class="text-xl text-red-500">Career Opportunities:</h2>
+                                    <p>BCA graduates can pursue careers as software developers, system analysts, IT
+                                        consultants,
+                                        and more. The demand for skilled IT professionals is consistently high.</p>
+                                </div>
+                                <h2 class="text-xl text-purple-900 font-bold">How to Excel in BCA:</h2>
+                                <p>To excel in BCA, consider the following:</p>
+                                <ol class="list-decimal pl-8 text-gray-700">
+                                    <li>Build strong programming skills in languages like Java, C++, or Python.</li>
+                                    <li>Participate in internships to gain practical experience.</li>
+                                    <li>Stay updated with emerging technologies and industry trends.</li>
+                                    <li>Work on real-world projects and collaborate with peers.</li>
+                                    <li>Consider pursuing specialized certifications for added expertise.</li>
+                                </ol>
+                            </ul>
+                            <button id="button5"
+                                class="mt-3 px-5 py-2 bg-rose-500 text-white duration-300 hover:bg-rose-700">Read
+                                more</button>
+                        </div>
+                    </div>
+
+                    <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                        <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 rounded-lg"></span>
+                        <div
+                            class="flex items-center justify-center relative h-full p-5 bg-white border-2 border-yellow-500 rounded-lg">
+                            <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/T-xb3XvHaXY?si=d__jroAofUA3UlMS"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#button1").click(function () {
+                $(".knowmorebsc").toggle();
+            });
+
+            $("#button2").click(function () {
+                $(".knowmorebpharma").toggle();
+            });
+
+            $("#button3").click(function () {
+                $(".knowmorebtech").toggle();
+            });
+            $("#button4").click(function () {
+                $(".knowmorembbs").toggle();
+            });
+            $("#button5").click(function () {
+                $(".knowmorebca").toggle();
+            });
+
+
+        });
+    </script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

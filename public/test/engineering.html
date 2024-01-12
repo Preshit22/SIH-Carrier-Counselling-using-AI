@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+</head>
+<style>
+    .knowmorebsc {
+        display: none;
+    }
+
+    .knowmorebpharma {
+        display: none;
+    }
+
+    .knowmorebtech {
+        display: none;
+    }
+
+    .knowmorembbs {
+        display: none;
+    }
+
+    .knowmorebca {
+        display: none;
+    }
+</style>
+
+<body>
+    <header class="no-print text-gray-600 body-font">
+        <nav
+          class="bg-transparent fixed w-full z-20 top-0 start-0 border-b border-gray-200 bg-opacity-30 backdrop-filter backdrop-blur-lg"
+        >
+          <div
+            class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+          >
+            <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+              <img src="/img/logo.png" class="h-10" alt="Flowbite Logo" />
+              <span
+                class="self-center hidden sm:block text-2xl font-semibold whitespace-nowrap dark:text-black"
+                >AI Guruji</span
+              >
+            </a>
+  
+            <div
+              id="loggedInContent"
+              style="display: none"
+              class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+            >
+              <button
+                onclick="localStorage.setItem('login', 'false'); window.location.reload();"
+                id="dropdownDefaultButton"
+                data-dropdown-toggle="dropdown"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+                type="button"
+              >
+                Sign Out
+              </button>
+            </div>
+  
+            <div
+              id="notLoggedInContent"
+              style="display: none"
+              class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+            >
+              <button
+                id="dropdownDefaultButton"
+                data-dropdown-toggle="dropdown"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+                type="button"
+              >
+                Sign in
+                <svg
+                  class="w-2.5 h-2.5 ms-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+            </div>
+            <!-- Dropdown menu -->
+            <div
+              id="dropdown"
+              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+            >
+              <ul
+                class="py-2 text-sm text-gray-700"
+                aria-labelledby="dropdownDefaultButton"
+              >
+                <li>
+                  <a
+                    href="/studentLogin"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                    >Student
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/parentLogin"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                    >Parent
+                  </a>
+                </li>
+              </ul>
+            </div>
+  
+            <button
+              data-collapse-toggle="navbar-sticky"
+              type="button"
+              class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-200"
+              aria-controls="navbar-sticky"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
+  
+            <div
+              class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+              id="navbar-sticky"
+            >
+              <ul
+                class="flex flex-col items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:border-gray-200"
+              >
+                <li>
+                  <a
+                    href="/"
+                    class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    >Home</a
+                  >
+                </li>
+  
+                <li>
+                  <a
+                    href="../test/result.html"
+                    class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    >Results</a
+                  >
+                </li>
+  
+                <li>
+                  <button
+                    id="dropdownDefaultButton"
+                    data-dropdown-toggle="langdropdown"
+                    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button"
+                  >
+                    Language
+                    <svg
+                      class="w-2.5 h-2.5 ms-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 10 6"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m1 1 4 4 4-4"
+                      />
+                    </svg>
+                  </button>
+  
+                  <!-- Dropdown menu -->
+                  <div
+                    id="langdropdown"
+                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-[white] border border-gray-300"
+                  >
+                    <ul
+                      class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="dropdownDefaultButton"
+                    >
+                      <li>
+                        <div class="p-0" id="google_translate_element"></div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+    <div class="bg-white ">
+        <div class="max-w-[1350px] mx-auto grid lg:grid-cols-2 gap-6 md:grid-cols-1">
+
+            <!-- card1 -->
+            <div class="relative h-full ml-0 mr-0 sm:mr-10 ">
+                <div class="relative isolate px-6 pt-14 lg:px-8">
+                    <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                        aria-hidden="true">
+                        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+                        </div>
+                    </div>
+                    <div class="mx-auto max-w-2xl py-10 sm:py-48 lg:py-56">
+                        <div class="text-center">
+                            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">CAREER IN
+                                ENGINEERING
+                            </h1>
+                            <p class="mt-6 text-lg leading-8 text-gray-600">
+                                Engineering is a diverse field applying scientific and mathematical principles to
+                                design, construct, and maintain systems. With branches like civil, mechanical,
+                                electrical, and aerospace engineering, engineers contribute to technological innovation
+                                and problem-solving. Civil engineers build infrastructure, while mechanical engineers
+                                focus on mechanical systems. Computer engineers blend electrical engineering and
+                                computer science for
+                                hardware and software development etc....
+                            </p>
+                        </div>
+                        <div class="mt-10 flex items-center justify-center gap-x-6">
+                            <a href="#knowmorebsc"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Read
+                                more</a>
+                        </div>
+                    </div>
+                    <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+                        aria-hidden="true">
+                        <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+                            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- card2 -->
+            <div class="relative h-full ml-0 md:mr-10 top-14">
+                <div class="mb-6 md:mb-0">
+                    <!-- Replace the iframe with an image -->
+                    <img src="../img/engineering_bg.jpg" alt="Image description"
+                        class="w-full h-auto md:h-[60vh] lg:h-[75vh] xl:h-[86vh] object-cover rounded-lg shadow-lg">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <br>
+
+    <!-- ################################################### -->
+
+
+
+                    <div class="bg-gray-100 min-h-screen p-4">
+                        <div class="container mx-auto pt-12 pb-20">
+                            <h1 class="text-4xl font-bold text-gray-800 text-center mb-8">
+                                Different Fields in Engineering
+                            </h1>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                <div class="bg-white rounded-lg shadow-lg p-8">
+                                    <h2 class="text-xl font-bold text-gray-800 mb-4">Mechanical Engineering</h2>
+                                    <p class="text-gray-700">
+
+                                    <ul class="list-disc pl-8 text-gray-700">
+                                        <li>Focuses on the design, analysis, and manufacturing of mechanical systems.
+                                        </li>
+                                        <li>Mechanical engineers work on machines, engines, HVAC systems, and thermal
+                                            devices.</li>
+                                        <li>Specializations include automotive engineering, aerospace engineering, and
+                                            robotics.</li>
+                                    </ul>
+                                    </p>
+                                </div>
+                                <div class="bg-white rounded-lg shadow-lg p-8">
+                                    <h2 class="text-xl font-bold text-gray-800 mb-4">Civil Engineering</h2>
+                                    <p class="text-gray-700">
+                                    <ul class="list-disc pl-8 text-gray-700">
+                                        <li>Involves the design, construction, and maintenance of infrastructure.</li>
+                                        <li>Civil engineers work on projects such as buildings, bridges, dams, roads,
+                                            and
+                                            water supply systems.</li>
+                                        <li>Specializations include structural engineering, transportation engineering,
+                                            and
+                                            geotechnical engineering.</li>
+                                    </ul>
+                                    </p>
+                                </div>
+                                <div class="bg-white rounded-lg shadow-lg p-8">
+                                    <h2 class="text-xl font-bold text-gray-800 mb-4">Computer Engineering</h2>
+                                    <p class="text-gray-700">
+                                    <ul class="list-disc pl-8 text-gray-700">
+                                        <li>Combines principles of electrical engineering and computer science.</li>
+                                        <li>Computer engineers design and develop computer hardware and software.</li>
+                                        <li>Specializations include hardware design, software development, and embedded
+                                            systems.</li>
+                                    </ul>
+                                    </p>
+                                </div>
+
+                                <div class="bg-white rounded-lg shadow-lg p-8">
+                                    <h2 class="text-xl font-bold text-gray-800 mb-4">Electrical Engineering</h2>
+                                    <p class="text-gray-700">
+                                        <ul class="list-disc pl-8 text-gray-700">
+                                            <li>Focuses on the study and application of electricity, electronics, and electromagnetism.</li>
+                                            <li>Electrical engineers work on power systems, electronics, telecommunications, and control systems.</li>
+                                            <li>Specializations include power engineering, electronics engineering, and telecommunications engineering.</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg shadow-lg p-8">
+                                    <h2 class="text-xl font-bold text-gray-800 mb-4">Chemical Engineering</h2>
+                                    <p class="text-gray-700">
+                                        <ul class="list-disc pl-8 text-gray-700">
+                                            <li>Involves the application of chemical, physical, and biological principles to develop processes for the production of chemicals and materials.</li>
+                                            <li>Chemical engineers work in areas such as petrochemicals, pharmaceuticals, food processing, and environmental engineering.</li>
+                                            <li>Specializations include process engineering, materials engineering, and environmental engineering.</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <hr class="border-t-2 border-gray-300 my-8">
+
+</body>
+
+</html>

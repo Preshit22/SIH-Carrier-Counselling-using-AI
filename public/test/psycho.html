@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #f8f8f8;
+      }
+      .app {
+        background: rgb(255, 255, 255);
+        width: 90%;
+        max-width: 600px;
+        border-radius: 10px;
+        padding: 30px;
+        border: 0px solid rgb(177, 177, 177);
+        box-shadow: -1px 10px 20px 0px rgba(197, 208, 216, 0.2);
+      }
+
+      h1 {
+        color: #001e4d;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .quiz {
+        padding: 20px 0;
+      }
+
+      .quiz h2 {
+        font-size: 18px;
+        color: #353535;
+        font-weight: 600;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        background-color: #e4e0e0;
+        color: #222;
+        font-weight: 500;
+        width: 100%;
+        border: 0px solid #222;
+        padding: 15px;
+        margin: 10px 0;
+        text-align: left;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .btn:hover:not(:disabled) {
+        background-color: #a7a5a5;
+      }
+
+      .btn:disabled {
+        cursor: no-drop;
+      }
+
+      #next-btn {
+        background-color: #001e4d;
+        color: #fff;
+        font-weight: 500;
+        widows: 150px;
+        border: 0;
+        padding: 15px 30px;
+        margin: 20px auto 0;
+        border-radius: 4px;
+        cursor: pointer;
+        display: none;
+      }
+
+      .correct {
+        background-color: #a7a5a5;
+      }
+
+      body > .skiptranslate {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="no-print text-gray-600 body-font">
+      <nav
+        class="bg-transparent fixed w-full z-20 top-0 start-0 border-b border-gray-200 bg-opacity-30 backdrop-filter backdrop-blur-lg"
+      >
+        <div
+          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+        >
+          <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="/img/logo.png" class="h-10" alt="Flowbite Logo" />
+            <span
+              class="self-center hidden sm:block text-2xl font-semibold whitespace-nowrap dark:text-black"
+              >AI Guruji</span
+            >
+          </a>
+
+          <div
+            id="loggedInContent"
+            style="display: none"
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <button
+              onclick="localStorage.setItem('login', 'false'); window.location.reload();"
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+              type="button"
+            >
+              Sign Out
+            </button>
+          </div>
+
+          <div
+            id="notLoggedInContent"
+            style="display: none"
+            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <button
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+              type="button"
+            >
+              Sign in
+              <svg
+                class="w-2.5 h-2.5 ms-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+          </div>
+          <!-- Dropdown menu -->
+          <div
+            id="dropdown"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700"
+              aria-labelledby="dropdownDefaultButton"
+            >
+              <li>
+                <a
+                  href="/studentLogin"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                  >Student
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/parentLogin"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-100"
+                  >Parent
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <button
+            data-collapse-toggle="navbar-sticky"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-200"
+            aria-controls="navbar-sticky"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+
+          <div
+            class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="navbar-sticky"
+          >
+            <ul
+              class="flex flex-col items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:border-gray-200"
+            >
+              <li>
+                <a
+                  href="/"
+                  class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Home</a
+                >
+              </li>
+
+              <li>
+                <a
+                  href="../test/result.html"
+                  class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Results</a
+                >
+              </li>
+
+              <li>
+                <button
+                  id="dropdownDefaultButton"
+                  data-dropdown-toggle="langdropdown"
+                  class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  type="button"
+                >
+                  Language
+                  <svg
+                    class="w-2.5 h-2.5 ms-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+
+                <!-- Dropdown menu -->
+                <div
+                  id="langdropdown"
+                  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-[white] border border-gray-300"
+                >
+                  <ul
+                    class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownDefaultButton"
+                  >
+                    <li>
+                      <div class="p-0" id="google_translate_element"></div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div
+      class="showIfLogin mt-[100px] flex flex-col justify-center items-center lg:items-start lg:flex-row lg:justify-around"
+    >
+      <div class="">
+        <h1
+          class="mb-1 m-5 text-4xl font-bold leading-none tracking-tight text-gray-800 md:text-2xl lg:text-3xl"
+        >
+          Psychometric Test
+        </h1>
+        <img src="../img/psycho.png" class="rounded-lg" alt="" />
+      </div>
+      <div class="app mt-10">
+        <div class="quiz">
+          <h2 id="question">Question here</h2>
+          <div id="answer-buttons">
+            <button class="btn">Option 1</button>
+            <button class="btn">Option 2</button>
+            <button class="btn">Option 3</button>
+          </div>
+          <button id="next-btn">Next</button>
+          <a href="../test/result.html">
+            <button
+              id="resultButton"
+              class="text-white bg-[#001e4d] hover:bg-[#05265a] focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-[#001e4d] dark:hover:bg-[#05265a]"
+            >
+              Show Me Results
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if 'login' item exists in local storage
+        if (localStorage.getItem("login") === "true") {
+          document.getElementById("loggedInContent").style.display = "block";
+          document.getElementById("notLoggedInContent").style.display = "none";
+          document.querySelector(".showIfLogin").style.display = "flex";
+        } else {
+          document.getElementById("loggedInContent").style.display = "none";
+          document.getElementById("notLoggedInContent").style.display = "block";
+          document.querySelector(".showIfLogin").style.display = "none";
+        }
+      });
+    </script>
+
+    <!-- Quiz script -->
+    <script>
+      const questions = [
+        {
+          question:
+            "Do you enjoy exploring new subjects and acquiring information just for the sake of learning?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Knowledge Orientation",
+        },
+        {
+          question:
+            "Would you consider yourself someone who enjoys reading books, articles, or watching documentaries to gain knowledge?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Knowledge Orientation",
+        },
+
+        {
+          question:
+            "Is participating in academic competitions or quizzes something you find interesting?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Knowledge Orientation",
+        },
+        {
+          question:
+            "Do you often find yourself researching topics beyond what is required for your school assignments?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Knowledge Orientation",
+        },
+        {
+          question:
+            "Do you believe that continuous learning is essential for personal growth and success?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Knowledge Orientation",
+        },
+
+        {
+          question:
+            "Are you inclined towards hands-on activities and enjoy learning through practical experiences?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Practical Orientation",
+        },
+        {
+          question:
+            "Do you prefer learning skills that have direct applications in real-life situations?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Practical Orientation",
+        },
+        {
+          question:
+            "Are you drawn to activities that involve problem-solving and finding practical solutions?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Practical Orientation",
+        },
+
+        {
+          question:
+            "Would you rather engage in projects that require physical effort and tangible results?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Practical Orientation",
+        },
+        {
+          question:
+            "Do you believe in the importance of gaining practical skills alongside theoretical knowledge?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Practical Orientation",
+        },
+        {
+          question:
+            "Do you enjoy expressing yourself through creative outlets such as drawing, painting, or other forms of art?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Artistic Orientation",
+        },
+
+        {
+          question:
+            "Is participating in drama, music, or dance something you find fulfilling?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Artistic Orientation",
+        },
+        {
+          question:
+            "Do you often find yourself daydreaming or imagining new ideas and concepts?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Artistic Orientation",
+        },
+        {
+          question:
+            "Are you drawn to activities that allow you to explore and express your emotions and thoughts?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Artistic Orientation",
+        },
+
+        {
+          question:
+            "Do you believe that creativity is an important aspect of personal development?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Artistic Orientation",
+        },
+        {
+          question:
+            "Do you enjoy spending time with a diverse group of people and making new friends?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Social Orientation",
+        },
+        {
+          question:
+            "Are you interested in participating in community service or volunteer work?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Social Orientation",
+        },
+
+        {
+          question:
+            "Do you find social events and gatherings energizing and enjoyable?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Social Orientation",
+        },
+        {
+          question:
+            "Are you interested in understanding different cultures and perspectives through social interactions?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Social Orientation",
+        },
+        {
+          question:
+            "Do you believe that building strong social connections is important for personal well-being?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Social Orientation",
+        },
+        {
+          question:
+            "Do you enjoy taking on leadership roles and responsibilities in group activities?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Power Orientation",
+        },
+        {
+          question:
+            "Are you motivated by the idea of achieving success and influencing others positively?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Power Orientation",
+        },
+
+        {
+          question:
+            "Do you find yourself naturally gravitating towards decision-making positions in team projects?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Power Orientation",
+        },
+        {
+          question:
+            "Are you interested in learning about how power dynamics shape relationships and societies?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Power Orientation",
+        },
+        {
+          question:
+            "Do you believe that having influence and authority can be used for positive change?",
+          answers: [
+            { text: "Yes", score: 4 },
+            { text: "No", score: 0 },
+            { text: "May be", score: 1 },
+          ],
+          typeOfQuestion: "Power Orientation",
+        },
+      ];
+
+      const questionElement = document.getElementById("question");
+      const answerButtons = document.getElementById("answer-buttons");
+      const nextButton = document.getElementById("next-btn");
+
+      resultButton.style.display = "none";
+      let currentQuestionIndex = 0;
+      let scores = {};
+      let totalScore = 0;
+
+      function startQuiz() {
+        currentQuestionIndex = 0;
+        scores = {};
+        totalScore = 0;
+        nextButton.innerHTML = "Next";
+        showQuestion();
+      }
+
+      function showQuestion() {
+        resetState();
+        let currentQuestion = questions[currentQuestionIndex];
+        let questionNo = currentQuestionIndex + 1;
+        questionElement.innerHTML =
+          questionNo + ". " + currentQuestion.question;
+
+        currentQuestion.answers.forEach((answer) => {
+          const button = document.createElement("button");
+          button.innerHTML = answer.text;
+          button.classList.add("btn");
+          answerButtons.appendChild(button);
+
+          button.addEventListener("click", () => selectAnswer(answer.score));
+        });
+      }
+
+      function resetState() {
+        nextButton.style.display = "none";
+        while (answerButtons.firstChild) {
+          answerButtons.removeChild(answerButtons.firstChild);
+        }
+      }
+
+      function selectAnswer(score) {
+        const selectedBtn = event.target;
+
+        // Reset the color of all buttons
+        Array.from(answerButtons.children).forEach((button) => {
+          button.classList.remove("correct");
+        });
+
+        // Change the color of the selected option
+        selectedBtn.classList.add("correct");
+
+        // Enable all buttons after selecting an option
+        Array.from(answerButtons.children).forEach((button) => {
+          button.disabled = false;
+        });
+
+        // Save the score for the latest option only
+        let currentQuestion = questions[currentQuestionIndex];
+
+        // Save the score for the latest option only
+        scores[currentQuestion.typeOfQuestion] =
+          scores[currentQuestion.typeOfQuestion] || 0; // Reset score to zero
+        scores[currentQuestion.typeOfQuestion] += score;
+        totalScore += score;
+
+        nextButton.style.display = "block";
+      }
+
+      function showScore() {
+        resetState();
+        let scoreMessage = "Your Scores:<br><br>";
+
+        for (const type in scores) {
+          if (scores.hasOwnProperty(type)) {
+            scoreMessage += `${type}: ${scores[type]}<br>`;
+          }
+        }
+
+        scoreMessage += `Total Score: ${totalScore}<br>`;
+        questionElement.innerHTML = scoreMessage;
+
+        resultButton.style.display = "block";
+        // Save scores to local storage
+        saveScoresToLocalStorage();
+      }
+
+      function saveScoresToLocalStorage() {
+        const scoresObject = {
+          "Knowledge Orientation": scores["Knowledge Orientation"] || 0,
+          "Practical Orientation": scores["Practical Orientation"] || 0,
+          "Artistic Orientation": scores["Artistic Orientation"] || 0,
+          "Social Orientation": scores["Social Orientation"] || 0,
+          "Power Orientation": scores["Power Orientation"] || 0,
+          "Total Score": totalScore,
+        };
+
+        localStorage.setItem("psychoTestScores", JSON.stringify(scoresObject));
+      }
+      function handleNextButton() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          showQuestion();
+        } else {
+          showScore();
+        }
+      }
+
+      nextButton.addEventListener("click", () => {
+        if (currentQuestionIndex < questions.length) {
+          handleNextButton();
+        } else {
+          startQuiz();
+        }
+      });
+
+      startQuiz();
+    </script>
+
+    <!-- Script for google translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: "en" },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+  </body>
+</html>
