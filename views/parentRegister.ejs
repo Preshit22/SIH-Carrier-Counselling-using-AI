@@ -1,0 +1,148 @@
+<div class="mt-[200px] mb-[150px] flex flex-col min-h-screen bg-white">
+  <main class="bg-white">
+    <div
+      class="flex flex-col justify-center items-center py-8 px-6 mx-auto md:h-screen"
+    >
+      <div
+        class="justify-center items-center w-full rounded-lg border border-gray-200 lg:flex md:mt-0 lg:max-w-screen-sm xl:p-0 bg-white"
+      >
+        <div class="p-6 w-full sm:p-8 lg:p-10">
+          <h1
+            class="mb-10 text-4xl font-bold leading-none tracking-tight text-gray-800 md:text-2xl lg:text-3xl"
+          >
+            Create a parent account
+          </h1>
+
+          <form action="/parentRegister" method="POST" class="mt-8">
+            <div
+              class="flex flex-col mb-6 space-y-6 md:flex-row md:space-y-0 md:space-x-6"
+            >
+              <div class="w-full">
+                <label
+                  for="firstName"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                  >Your first name</label
+                >
+                <input
+                  required=""
+                  placeholder="John"
+                  name="firstName"
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value=""
+                />
+              </div>
+              <div class="w-full">
+                <label
+                  for="lastName"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                  >Your last name</label
+                >
+                <input
+                  required=""
+                  placeholder="Doe"
+                  name="lastName"
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="mb-6">
+              <label
+                for="studentEmail"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >Student's email</label
+              >
+              <input
+                required=""
+                placeholder="student@school.com"
+                name="studentEmail"
+                type="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value=""
+              />
+            </div>
+            <div class="mb-6">
+              <label
+                for="studentPassword"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >Student's password</label
+              >
+              <input
+                required=""
+                placeholder="Student's password"
+                name="studentPassword"
+                type="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value=""
+              />
+            </div>
+            <div class="mb-6">
+              <label
+                for="parentEmail"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >Your email</label
+              >
+              <input
+                required=""
+                placeholder="parent@company.com"
+                name="parentEmail"
+                type="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value=""
+              />
+            </div>
+            <div class="mb-6">
+              <label
+                for="password"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >Your password</label
+              >
+              <input
+                required=""
+                placeholder=""
+                name="password"
+                type="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value=""
+              />
+            </div>
+            <div class="mb-6">
+              <label
+                for="confirmPassword"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >Confirm password</label
+              >
+              <input
+                required=""
+                placeholder=""
+                name="confirmPassword"
+                type="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value=""
+              />
+            </div>
+            <div class="flex items-start mb-6"></div>
+            <button
+              class="text-white font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center bg-blue-700"
+              type="submit"
+            >
+              <span class="flex justify-center items-center"
+                >Create account</span
+              >
+            </button>
+            <div class="mb-6"></div>
+            <div class="text-sm font-medium">
+              Already have an account?<a
+                class="ml-1 text-blue-700 dark:text-blue-500 hover:underline"
+                href="/parentLogin"
+                >Sign in here.</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

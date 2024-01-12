@@ -1,0 +1,224 @@
+<div class="mt-[250px] mb-[150px] flex flex-col min-h-screen bg-white">
+  <main class="bg-white">
+    <div
+      class="flex flex-col justify-center items-center py-8 px-6 mx-auto md:h-screen"
+    >
+      <div
+        class="justify-center items-center w-full rounded-lg border border-gray-200 lg:flex md:mt-0 lg:max-w-screen-sm xl:p-0 bg-white"
+      >
+        <div class="p-6 w-full sm:p-8 lg:p-10">
+          <h1
+            class="mb-10 text-4xl font-bold leading-none tracking-tight text-gray-800 md:text-2xl lg:text-3xl"
+          >
+            Complete Your Profile
+          </h1>
+
+          <form action="/editProfile" method="POST" class="mt-8">
+            <div
+              class="flex flex-col mb-6 space-y-6 md:flex-row md:space-y-0 md:space-x-6"
+            >
+              <div class="w-full">
+                <label
+                  for="firstName"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                  >First name</label
+                ><input
+                  required=""
+                  placeholder="John"
+                  name="firstName"
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value=""
+                />
+              </div>
+              <div class="w-full">
+                <label
+                  for="lastName"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                  >Last name</label
+                ><input
+                  required=""
+                  placeholder="Doe"
+                  name="lastName"
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="mb-6">
+              <label
+                for="email"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >Your email</label
+              ><input
+                required=""
+                placeholder="name@gmail.com"
+                name="email"
+                type="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value=""
+              />
+            </div>
+            <div
+              class="flex flex-col mb-6 space-y-6 md:flex-row md:space-y-0 md:space-x-6"
+            >
+              <div class="w-full">
+                <label
+                  for="age"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                  >Age</label
+                ><input
+                  required=""
+                  name="age"
+                  type="number"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value=""
+                />
+              </div>
+              <div class="w-full">
+                <label
+                  for="gender"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                  >Gender</label
+                ><input
+                  required=""
+                  name="gender"
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="mb-6">
+              <label
+                for="educationBoard"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >Your Education Board</label
+              ><input
+                required=""
+                placeholder=""
+                name="educationBoard"
+                type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value=""
+              />
+            </div>
+            <div class="mb-6">
+              <label
+                for="parentEmail"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >Parent email</label
+              ><input
+                required=""
+                placeholder=""
+                name="parentEmail"
+                type="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value=""
+              />
+            </div>
+            <div
+              class="flex flex-col mb-6 space-y-6 md:flex-row md:space-y-0 md:space-x-6"
+            >
+              <div class="w-full">
+                <label
+                  for="parentNumber"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                  >Parent Contact Number</label
+                ><input
+                  required=""
+                  name="parentNumber"
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value=""
+                />
+              </div>
+              <div class="w-full">
+                <label
+                  for="familyIncome"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                  >Family Income</label
+                ><input
+                  required=""
+                  name="familyIncome"
+                  type="number"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="mb-6">
+              <label
+                for="address"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >Your Address </label
+              ><input
+                required=""
+                placeholder=""
+                name="address"
+                type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-300 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value=""
+              />
+            </div>
+            <div class="flex items-start mb-6"></div>
+            <button
+              class="text-white font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center bg-blue-700"
+              type="submit"
+            >
+              <span class="flex justify-center items-center">Submit</span>
+            </button>
+            <div class="mb-6">
+              <div>
+                <div
+                  class="grecaptcha-badge"
+                  data-style="none"
+                  style="
+                    width: 256px;
+                    height: 60px;
+                    position: fixed;
+                    visibility: hidden;
+                  "
+                >
+                  <div class="grecaptcha-logo">
+                    <iframe
+                      title="reCAPTCHA"
+                      width="256"
+                      height="60"
+                      role="presentation"
+                      name="a-8qnodmwdxff8"
+                      frameborder="0"
+                      scrolling="no"
+                      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"
+                      src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcKn58eAAAAAFD-lFXQHCSkdJ9V76lq3KLyNygU&amp;co=aHR0cHM6Ly9mbG93Yml0ZS5jb206NDQz&amp;hl=en&amp;type=image&amp;v=cwQvQhsy4_nYdnSDY4u7O5_B&amp;theme=light&amp;size=invisible&amp;badge=bottomright&amp;cb=jw8losxmmtvz"
+                    ></iframe>
+                  </div>
+                  <div class="grecaptcha-error"></div>
+                  <textarea
+                    id="g-recaptcha-response-1"
+                    name="g-recaptcha-response"
+                    class="g-recaptcha-response"
+                    style="
+                      width: 250px;
+                      height: 40px;
+                      border: 1px solid rgb(193, 193, 193);
+                      margin: 10px 25px;
+                      padding: 0px;
+                      resize: none;
+                      display: none;
+                    "
+                  ></textarea>
+                </div>
+                <iframe style="display: none"></iframe>
+              </div>
+            </div>
+            <div class="text-sm font-medium">
+              Confirm Information Before Submitting the form.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
